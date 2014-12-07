@@ -9,8 +9,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import action.LoginAction;
 
 //import frame.JProgressBarFrame;
 
@@ -109,7 +111,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 			progressBar.setVisible(true);// 设置进度条可见
 			new Thread() {
 				public void run() {
-//					getValues();// 得到界面中的所有项的值
+					getValues();// 得到界面中的所有项的值
 					checkUser();// 登录验证
 				}
 			}.start();
@@ -118,15 +120,22 @@ public class LoginFrame extends JFrame implements ActionListener{
 		}
 	}
 
-	protected void checkUser() {
-		// TODO Auto-generated method stub
-		progressBar.dispose();
-		this.dispose();
-		MainFrame myframe = new MainFrame();
-		myframe.init();
-		myframe.initSelect();
-		myframe.setVisible(true);
-		
+	private void checkUser() {
+		LoginAction login = new LoginAction(username,
+				password);
+		if (login.isLogin()) {// 登录成功
+			progressBar.dispose();
+			this.dispose();// 释放本窗口资源
+			MainFrame fr = new MainFrame();
+			fr.init();
+			fr.initSelect();
+			fr.setVisible(true);			
+		} else {// 登录失败
+			progressBar.setVisible(false);
+			JOptionPane.showMessageDialog(this, "<html><h4>"
+					+ "登录失败，请检查用户名、密码是否正确！" + "<html><h4>", "警告",
+					JOptionPane.WARNING_MESSAGE);
+		}
 	}
 
 	@SuppressWarnings("deprecation")
