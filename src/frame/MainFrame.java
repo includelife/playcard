@@ -88,18 +88,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		this.getContentPane().add(backgroundLabel);
 	}
 	
-	public void init3() {
-		JButton returnbutton = new JButton("返 回");
-		JButton settingbutton = new JButton("设 置");
-		
-		returnbutton.setBounds(700, 10, 80, 20);
-		settingbutton.setBounds(700, 40, 80, 20);
-		
-		this.getContentPane().add(returnbutton);
-		this.getContentPane().add(settingbutton);
-		
-		
-	}
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 
@@ -111,10 +100,9 @@ public class MainFrame extends JFrame implements ActionListener{
 		if(e.getSource() == single){
 			//JOptionPane.showMessageDialog(this, "单人模式");
 			this.dispose();	
-			MainFrame fr = new MainFrame();
-			fr.init();
-			fr.init3();
-			fr.setVisible(true);
+			PlayFrame pfr = new PlayFrame();
+			pfr.init();
+			pfr.setVisible(true);
 		}else if(e.getSource() == multi){
 			JOptionPane.showMessageDialog(this, "开发中");
 		}else if(e.getSource() == help){
