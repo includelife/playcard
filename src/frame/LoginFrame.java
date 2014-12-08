@@ -1,7 +1,9 @@
 package frame;
 
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
 import action.LoginAction;
 
 //import frame.JProgressBarFrame;
@@ -30,12 +33,12 @@ public class LoginFrame extends JFrame implements ActionListener{
 	private JButton loginButton = null, resetButton = null;
 	private JProgressBarFrame progressBar = null;
 	private String username = null, password = null;
+	private JButton regisButton;
 	
 	public LoginFrame() {
 		// TODO Auto-generated constructor stub
 		super();
 		getContentPane().setLayout(null);
-		
 		jFrameValidate(); 
 		
 		setTitle("登录游戏");
@@ -44,19 +47,29 @@ public class LoginFrame extends JFrame implements ActionListener{
 		backgroundLabel.setBounds(0, 0, 800, 600);
 		backgroundLabel.setLayout(null);
 		
-		
+		//标题标签
+		final JLabel titleLabel = new JLabel();
+		titleLabel.setText("斗	地	主");
+		Font myfont = new Font("宋体",Font.CENTER_BASELINE,60);
+		titleLabel.setFont(myfont);
+		titleLabel.setBounds(330, 35, 400, 200);
+		this.getContentPane().add(titleLabel);
+
+		//用户名标签
 		final JLabel nameLable = new JLabel();
 		nameLable.setText("用户名 ：");
 		nameLable.setBounds(230, 203, 100, 18);
 		//将服务器标签添加进背景标签
 		backgroundLabel.add(nameLable);
 		
+		//密码标签
 		final JLabel passLable = new JLabel();
 		passLable.setText("密  码 ：");
 		passLable.setBounds(230, 243, 100, 18);
 		//将服务器标签添加进背景标签
 		backgroundLabel.add(passLable);
 		
+		//用户名
 		nameTF = new JTextField();
 		nameTF.setBounds(370, 203, 150, 22);
 		backgroundLabel.add(nameTF);
@@ -68,18 +81,24 @@ public class LoginFrame extends JFrame implements ActionListener{
 		
 		loginButton = new JButton("登录");
 		resetButton = new JButton("重置");
+		regisButton = new JButton("注册");
 		backgroundLabel.add(loginButton);
 		backgroundLabel.add(resetButton);
-		loginButton.setBounds(280, 360, 80, 30);
-		resetButton.setBounds(400, 360, 80, 30);
+		backgroundLabel.add(regisButton);
+		loginButton.setBounds(260, 360, 80, 30);
+		resetButton.setBounds(380, 360, 80, 30);
+		regisButton.setBounds(500, 360, 80, 30);
 		
 		//添加监听器
 		loginButton.addActionListener(this);
 		resetButton.addActionListener(this);
+		regisButton.addActionListener(this);
+		
 		
 		//把背景标签添加进内容面板
 		getContentPane().add(backgroundLabel);
 		
+		getContentPane().setBackground(new Color(0, 112, 26));
 		progressBar = new JProgressBarFrame(this, "登录", "登录中，请稍后...");
 		
 		reset();// 默认初始值
@@ -117,6 +136,12 @@ public class LoginFrame extends JFrame implements ActionListener{
 			}.start();
 		} else if (e.getSource() == resetButton) {// 重置
 			reset();// 重新设置各项的值
+		}else if(e.getSource() == regisButton){
+			//注册界面
+			this.setVisible(false);;
+			RegisFrame rf = new RegisFrame();
+			rf.init();
+			rf.setVisible(true);			
 		}
 	}
 

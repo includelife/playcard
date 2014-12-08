@@ -30,8 +30,8 @@ public class PlayFrame extends JFrame implements ActionListener {
 		returnButton = new JButton("∑µ ªÿ");
 		settingButton = new JButton("…Ë ÷√");
 		
-		returnButton.setBounds(700, 10, 80, 20);
-		settingButton.setBounds(700, 40, 80, 20);
+		returnButton.setBounds(700, 10, 80, 30);
+		settingButton.setBounds(700, 45, 80, 30);
 		
 		returnButton.addActionListener(this);
 		settingButton.addActionListener(this);

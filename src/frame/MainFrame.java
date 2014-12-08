@@ -3,6 +3,7 @@ package frame;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,15 +24,22 @@ public class MainFrame extends JFrame implements ActionListener{
 	}
 	
 	public void init() {
+		pane = this.getContentPane();
 		this.setTitle("斗地主");
 		this.setSize(800, 600);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setLocationRelativeTo(getOwner()); // 屏幕居中
-		pane = this.getContentPane();
 		pane.setLayout(null);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pane.setBackground(new Color(0, 112, 26)); // 背景为绿色		
 		
+		//标题标签
+		final JLabel titleLabel = new JLabel();
+		titleLabel.setText("欢迎来到斗地主");
+		Font myfont = new Font("宋体",Font.CENTER_BASELINE,60);
+		titleLabel.setFont(myfont);
+		titleLabel.setBounds(200, 35, 700, 200);
+		this.getContentPane().add(titleLabel);
 		
 //		JLabel backgroundLabel = new JLabel();
 //		backgroundLabel.setBounds(0, 0, 800, 600);
