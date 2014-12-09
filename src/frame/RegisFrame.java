@@ -149,7 +149,7 @@ public class RegisFrame extends JFrame {
 						userPro.setProperty(u_name, u_pwd_ag);
 						try {
 							userPro.store(new FileOutputStream(file),
-									"");
+									"created by huzhp");
 							JOptionPane.showMessageDialog(contentPane, "¹§Ï²Äã£¬×¢²á³É¹¦£¡");
 						} catch (FileNotFoundException e1) {
 							// TODO Auto-generated catch block

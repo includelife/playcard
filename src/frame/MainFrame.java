@@ -18,6 +18,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	private JButton multi = null;
 	private JButton help = null;
 	private JButton langue = null;
+	private JButton rebutton = null;
 	
 	public MainFrame() {		
 		super();
@@ -77,21 +78,25 @@ public class MainFrame extends JFrame implements ActionListener{
 		multi = new JButton("多人模式");
 		help = new JButton("帮  助");
 		langue = new JButton("语  言");
+		rebutton = new JButton("返 回");
 		
 		single.setBounds(365, 190, 100, 40);
 		multi.setBounds(365, 190+50, 100, 40);
 		help.setBounds(365, 190+50*2, 100, 40);
 		langue.setBounds(365, 190+50*3, 100, 40);
+		rebutton.setBounds(365, 190+50*4, 100, 40);
 		
 		single.addActionListener(this);
 		multi.addActionListener(this);
 		help.addActionListener(this);
 		langue.addActionListener(this);
+		rebutton.addActionListener(this);
 
 		backgroundLabel.add(single);
 		backgroundLabel.add(multi);
 		backgroundLabel.add(help);
 		backgroundLabel.add(langue);
+		backgroundLabel.add(rebutton);
 
 		this.getContentPane().add(backgroundLabel);
 	}
@@ -117,6 +122,10 @@ public class MainFrame extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, "您需要什么帮助？");
 		}else if(e.getSource() == langue){
 			JOptionPane.showMessageDialog(this, "开发中");	
+		}else if(e.getSource() == rebutton){
+			this.dispose();
+			LoginFrame fr = new LoginFrame();
+			fr.setVisible(true);
 		}
 	}
 }
