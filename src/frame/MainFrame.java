@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import play.Playing;
+
 public class MainFrame extends JFrame implements ActionListener{
 	private Container pane = null;
 	private JButton single = null;
@@ -112,10 +114,13 @@ public class MainFrame extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource() == single){
 			//JOptionPane.showMessageDialog(this, "单人模式");
-			this.dispose();	
-			PlayFrame pfr = new PlayFrame();
-			pfr.init();
-			pfr.setVisible(true);
+			this.dispose();
+//			PlayFrame pfr = new PlayFrame();
+//			String s = new String();
+//			pfr.init(s);
+//			pfr.setVisible(true);
+			Playing play = new Playing();
+			play.setVisible(true);
 		}else if(e.getSource() == multi){
 			JOptionPane.showMessageDialog(this, "开发中");
 		}else if(e.getSource() == help){

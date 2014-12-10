@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import play.Playing;
 import action.LoginAction;
 
 //import frame.JProgressBarFrame;
@@ -151,6 +152,8 @@ public class LoginFrame extends JFrame implements ActionListener{
 		if (login.isLogin()) {// 登录成功
 			progressBar.dispose();
 			this.dispose();// 释放本窗口资源
+//			Playing play = new Playing();
+//			play.setVisible(true);
 			MainFrame fr = new MainFrame();
 			fr.init();
 			fr.initSelect();

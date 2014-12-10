@@ -8,101 +8,102 @@ import javax.swing.JOptionPane;
 
 import play.Playing;
 import playcard.Card;
+import playcard.CardType;
+import playcard.Model;
+import util.PlayUtil;
 
 public class Time extends Thread{
-	private Playing playing;
+	Playing palying;
 	private boolean isRun = true;
 	int i = 10;
-	
-	public Time(Playing play,int i) {
-		// TODO Auto-generated constructor stub
-		this.playing = play;
+
+	public Time(Playing play, int i) {
+		this.palying = play;
 		this.i = i;
 	}
-	
+
+	@Override
 	public void run() {
 
-		while (i > -1 && isRun) {
-			playing.getTimefield()[1].setText("倒计时:" + i--);
+		while (i > -1 && isRun()) {
+			palying.time[1].setText("倒计时:" + i--);
 			second(1);// 等一秒
 		}
-		if (i == -1) // 正常终结，说明超时
-		{
-			playing.getTimefield()[1].setText("不抢");
-		}
-		playing.getLandlord()[0].setVisible(false);
-		playing.getLandlord()[1].setVisible(false);
-		for (Card card2 : playing.getPlayerList()[1])
-			card2.setCanClick(true);// 可被点击
+		if (i == -1)// 正常终结，说明超时
+			palying.time[1].setText("不抢");
+		palying.landlord[0].setVisible(false);
+		palying.landlord[1].setVisible(false);
+		for (Card card2 : palying.playerList[1])
+			card2.canClick = true;// 可被点击
 		// 如果自己抢到地主
-		if (playing.getTimefield()[1].getText().equals("抢地主")) {
+		if (palying.time[1].getText().equals("抢地主")) {
 			// 得到地主牌
-			playing.getPlayerList()[1].addAll(playing.getLordList());
+			palying.playerList[1].addAll(palying.lordList);
 			openlord(true);
 			second(2);// 等待五秒
-			Common.order(playing.getPlayerList()[1]);
-			Common.rePosition(playing, playing.getPlayerList()[1], 1);
+			PlayUtil.order(palying.playerList[1]);
+			PlayUtil.rePosition(palying, palying.playerList[1], 1);
 			setlord(1);
 		} else {
 			// 电脑选地主
-			if (Common.getScore(playing.getPlayerList()[0]) < Common
-					.getScore(playing.getPlayerList()[2])) {
-				playing.getTimefield()[2].setText("抢地主");
-				playing.getTimefield()[2].setVisible(true);
+			if (PlayUtil.getScore(palying.playerList[0]) < PlayUtil
+					.getScore(palying.playerList[2])) {
+				palying.time[2].setText("抢地主");
+				palying.time[2].setVisible(true);
 				setlord(2);// 设定地主
 				openlord(true);
 				second(3);
-				playing.getPlayerList()[2].addAll(playing.getLordList());
-				Common.order(playing.getPlayerList()[2]);
-				Common.rePosition(playing, playing.getPlayerList()[2], 2);
+				palying.playerList[2].addAll(palying.lordList);
+				PlayUtil.order(palying.playerList[2]);
+				PlayUtil.rePosition(palying, palying.playerList[2], 2);
 				openlord(false);
 
 			} else {
-				playing.getTimefield()[0].setText("抢地主");
-				playing.getTimefield()[0].setVisible(true);
+				palying.time[0].setText("抢地主");
+				palying.time[0].setVisible(true);
 				setlord(0);// 设定地主
 				openlord(true);
 				second(3);
-				playing.getPlayerList()[0].addAll(playing.getLordList());
-				Common.order(playing.getPlayerList()[0]);
-				Common.rePosition(playing, playing.getPlayerList()[0], 0);
-				//openlord(false);
+				palying.playerList[0].addAll(palying.lordList);
+				PlayUtil.order(palying.playerList[0]);
+				PlayUtil.rePosition(palying, palying.playerList[0], 0);
+				openlord(false);
 
 			}
 		}
 		// 选完地主后 关闭地主按钮
-		playing.getLandlord()[0].setVisible(false);
-		playing.getLandlord()[1].setVisible(false);
+		palying.landlord[0].setVisible(false);
+		palying.landlord[1].setVisible(false);
 		turnOn(false);
 		for (int i = 0; i < 3; i++)
 		{
-			playing.getTimefield()[i].setText("不要");
-			playing.getTimefield()[i].setVisible(false);
+			palying.time[i].setText("不要");
+			palying.time[i].setVisible(false);
 		}
 		// 开始游戏 根据地主不同顺序不同
-		playing.turn=playing.lordFlag;
+		palying.turn=palying.lordFlag;
 		while (true) {
 			
-			if(playing.turn==1) //我
+			if(palying.turn==1) //我
 			{
 				turnOn(true);// 出牌按钮 --我出牌
 				timeWait(30, 1);// 我自己的定时器
 				turnOn(false);//选完关闭
-				playing.turn=(playing.turn+1)%3;
+				palying.turn=(palying.turn+1)%3;
 				if(win())//判断输赢
 					break;
 			}
-			if (playing.turn==0) 
+			if (palying.turn==0) 
 			{
 				computer0();
-				playing.turn=(playing.turn+1)%3;
+				palying.turn=(palying.turn+1)%3;
 				if(win())//判断输赢
 					break;
 			}
-			if(playing.turn==2)
+			if(palying.turn==2)
 			{
 				computer2();
-				playing.turn=(playing.turn+1)%3;
+				palying.turn=(palying.turn+1)%3;
 				if(win())//判断输赢
 					break;
 			}
@@ -123,11 +124,11 @@ public class Time extends Thread{
 	public void openlord(boolean is) {
 		for (int i = 0; i < 3; i++) {
 			if (is)
-				playing.getLordList().get(i).turnFront(); // 地主牌翻看
+				palying.lordList.get(i).turnFront(); // 地主牌翻看
 			else {
-				playing.getLordList().get(i).turnRear(); // 地主牌闭合
+				palying.lordList.get(i).turnRear(); // 地主牌闭合
 			}
-			playing.getLordList().get(i).canClick = true;// 可被点击
+			palying.lordList.get(i).canClick = true;// 可被点击
 		}
 	}
 
@@ -138,26 +139,26 @@ public class Time extends Thread{
 		{
 			point.x = 80;
 			point.y = 430;
-			playing.lordFlag = 1;// 设定地主
+			palying.lordFlag = 1;// 设定地主
 		}
 		if (i == 0) {
 			point.x = 80;
 			point.y = 20;
-			playing.lordFlag = 0;
+			palying.lordFlag = 0;
 		}
 		if (i == 2) {
 			point.x = 700;
 			point.y = 20;
-			playing.lordFlag = 2;
+			palying.lordFlag = 2;
 		}
-		playing.lord.setLocation(point);
-		playing.lord.setVisible(true);
+		palying.lord.setLocation(point);
+		palying.lord.setVisible(true);
 	}
 
 	// 打开出牌按钮
 	public void turnOn(boolean flag) {
-		playing.publishCard[0].setVisible(flag);
-		playing.publishCard[1].setVisible(flag);
+		palying.publishCard[0].setVisible(flag);
+		palying.publishCard[1].setVisible(flag);
 	}
 
 	// 电脑0走牌(我代表1)
@@ -176,12 +177,12 @@ public class Time extends Thread{
 
 	// 走牌
 	public void ShowCard(int role) {
-		Model model = Common.getModel(playing.getPlayerList()[role]);
+		Model model = PlayUtil.getModel(palying.playerList[role]);
 		// 待走的牌
 		List<String> list = new ArrayList();
 		// 如果是主动出牌
-		if (playing.getTimefield()[(role + 1) % 3].getText().equals("不要")
-				&& playing.getTimefield()[(role + 2) % 3].getText().equals("不要")) {
+		if (palying.time[(role + 1) % 3].getText().equals("不要")
+				&& palying.time[(role + 2) % 3].getText().equals("不要")) {
 			// 有单出单 (除开3带，飞机能带的单牌)
 			if (model.a1.size() > (model.a111222.size() * 2 + model.a3.size())) {
 				list.add(model.a1.get(model.a1.size() - 1));
@@ -242,11 +243,11 @@ public class Time extends Thread{
 			}
 		}// 如果是跟牌
 		else {
-			List<Card> player = playing.currentList[(role + 2) % 3].size() > 0 
-					? playing.currentList[(role + 2) % 3]
-					: playing.currentList[(role + 1) % 3];
+			List<Card> player = palying.currentList[(role + 2) % 3].size() > 0 
+					? palying.currentList[(role + 2) % 3]
+					: palying.currentList[(role + 1) % 3];
 			
-			CardType cType=Common.jugdeType(player);
+			CardType cType=PlayUtil.jugdeType(player);
 			//如果是单牌
 			if(cType==CardType.c1)
 			{
@@ -307,7 +308,7 @@ public class Time extends Thread{
 		}
 
 		// 定位出牌
-		playing.currentList[role].clear();
+		palying.currentList[role].clear();
 		if (list.size() > 0) {
 			Point point = new Point();
 			if (role == 0)
@@ -317,21 +318,21 @@ public class Time extends Thread{
 			point.y = (400 / 2) - (list.size() + 1) * 15 / 2;// 屏幕中部
 			// 将name转换成Card
 			for (int i = 0, len = list.size(); i < len; i++) {
-				List<Card> cards = getCardByName(playing.getPlayerList()[role],
+				List<Card> cards = getCardByName(palying.playerList[role],
 						list.get(i));
 				for (Card card : cards) {
-					Common.move(card, card.getLocation(), point);
+					PlayUtil.move(card, card.getLocation(), point);
 					point.y += 15;
-					main.currentList[role].add(card);
-					main.playerList[role].remove(card);
+					palying.currentList[role].add(card);
+					palying.playerList[role].remove(card);
 				}
 			}
-			Common.rePosition(main, main.playerList[role], role);
+			PlayUtil.rePosition(palying, palying.playerList[role], role);
 		} else {
-			main.time[role].setVisible(true);
-			main.time[role].setText("不要");
+			palying.time[role].setVisible(true);
+			palying.time[role].setText("不要");
 		}
-		for(Card card:main.currentList[role])
+		for(Card card:palying.currentList[role])
 			card.turnFront();
 	}
 
@@ -355,7 +356,7 @@ public class Time extends Thread{
 		for(int i=0,len=model.size();i<len;i++)
 		{
 			String []s=model.get(i).split(",");
-			if(s.length==player.size()&&getValueInt(model.get(i))>Common.getValue(player.get(0)))
+			if(s.length==player.size()&&getValueInt(model.get(i))>PlayUtil.getValue(player.get(0)))
 			{
 				list.add(model.get(i));
 				return;
@@ -365,7 +366,7 @@ public class Time extends Thread{
 	//飞机带单，双
 	public void AI_4(List<String> model1,List<String> model2,List<Card> player,List<String> list,int role){
 		//排序按重复数
-		player=Common.getOrder2(player);
+		player=PlayUtil.getOrder2(player);
 		int len1=model1.size();
 		int len2=model2.size();
 		
@@ -374,7 +375,7 @@ public class Time extends Thread{
 		for(int i=0;i<len1;i++){
 			String []s=model1.get(i).split(",");
 			String []s2=model2.get(0).split(",");
-			if((s.length/3<=len2)&&(s.length*(3+s2.length)==player.size())&&getValueInt(model1.get(i))>Common.getValue(player.get(0)))
+			if((s.length/3<=len2)&&(s.length*(3+s2.length)==player.size())&&getValueInt(model1.get(i))>PlayUtil.getValue(player.get(0)))
 			{
 				list.add(model1.get(i));
 				for(int j=1;j<=s.length/3;j++)
@@ -385,14 +386,14 @@ public class Time extends Thread{
 	//4带1，2
 	public void AI_5(List<String> model1,List<String> model2,List<Card> player,List<String> list,int role){
 		//排序按重复数
-		player=Common.getOrder2(player);
+		player=PlayUtil.getOrder2(player);
 		int len1=model1.size();
 		int len2=model2.size();
 		
 		if(len1<1 || len2<2)
 			return;
 		for(int i=0;i<len1;i++){
-			if(getValueInt(model1.get(i))>Common.getValue(player.get(0)))
+			if(getValueInt(model1.get(i))>PlayUtil.getValue(player.get(0)))
 			{
 				list.add(model1.get(i));
 				for(int j=1;j<=2;j++)
@@ -403,12 +404,12 @@ public class Time extends Thread{
 	//单牌，对子，3个，4个,通用
 	public void AI_1(List<String> model,List<Card> player,List<String> list,int role){
 		//顶家
-		if((role+1)%3==main.dizhuFlag)
+		if((role+1)%3==palying.lordFlag)
 		{
 			
 			for(int i=0,len=model.size();i<len;i++)
 			{
-				if(getValueInt(model.get(i))>Common.getValue(player.get(0)))
+				if(getValueInt(model.get(i))>PlayUtil.getValue(player.get(0)))
 				{
 					list.add(model.get(i));
 					break;
@@ -418,7 +419,7 @@ public class Time extends Thread{
 			
 			for(int len=model.size(),i=len-1;i>=0;i--)
 			{
-				if(getValueInt(model.get(i))>Common.getValue(player.get(0)))
+				if(getValueInt(model.get(i))>PlayUtil.getValue(player.get(0)))
 				{
 					list.add(model.get(i));
 					break;
@@ -430,7 +431,7 @@ public class Time extends Thread{
 	public void AI_2(List<String> model1,List<String> model2,List<Card> player,List<String> list,int role){
 		//model1是主牌,model2是带牌,player是玩家出的牌,,list是准备回的牌
 		//排序按重复数
-		player=Common.getOrder2(player);
+		player=PlayUtil.getOrder2(player);
 		int len1=model1.size();
 		int len2=model2.size();
 		//如果有王直接炸了
@@ -444,7 +445,7 @@ public class Time extends Thread{
 			return;
 		for(int len=len1,i=len-1;i>=0;i--)
 		{	
-			if(getValueInt(model1.get(i))>Common.getValue(player.get(0)))
+			if(getValueInt(model1.get(i))>PlayUtil.getValue(player.get(0)))
 			{
 				list.add(model1.get(i));
 				break;
@@ -457,31 +458,32 @@ public class Time extends Thread{
 	// 延时，模拟时钟
 	public void timeWait(int n, int player) {
 
-		if (playing.currentList[player].size() > 0)
-			Common.hideCards(main.currentList[player]);
+		if (palying.currentList[player].size() > 0)
+			PlayUtil.hideCards(palying.currentList[player]);
 		if (player == 1)// 如果是我，10秒到后直接下一家出牌
 		{
 			int i = n;
-			while (main.nextPlayer == false && i >= 0) {
+
+			while (palying.nextPlayer == false && i >= 0) {
 				// main.container.setComponentZOrder(main.time[player], 0);
-				main.time[player].setText("倒计时:" + i);
-				main.time[player].setVisible(true);
+				palying.time[player].setText("倒计时:" + i);
+				palying.time[player].setVisible(true);
 				second(1);
 				i--;
 			}
 			if (i == -1) {
-				main.time[player].setText("超时");
+				palying.time[player].setText("超时");
 			}
-			main.nextPlayer = false;
+			palying.nextPlayer = false;
 		} else {
 			for (int i = n; i >= 0; i--) {
 				second(1);
 				// main.container.setComponentZOrder(main.time[player], 0);
-				main.time[player].setText("倒计时:" + i);
-				main.time[player].setVisible(true);
+				palying.time[player].setText("倒计时:" + i);
+				palying.time[player].setVisible(true);
 			}
 		}
-		main.time[player].setVisible(false);
+		palying.time[player].setVisible(false);
 	}
 	//通过name估值
 	public  int getValueInt(String n){
@@ -497,7 +499,7 @@ public class Time extends Thread{
 	//判断输赢
 	public boolean win(){
 		for(int i=0;i<3;i++){
-			if(playing.getPlayerList()[i].size()==0)
+			if(palying.playerList[i].size()==0)
 			{
 				String s;
 				if(i==1)
@@ -506,10 +508,18 @@ public class Time extends Thread{
 				}else {
 					s="恭喜电脑"+i+",赢了! 你的智商有待提高哦";
 				}
-				JOptionPane.showMessageDialog(main, s);
+				JOptionPane.showMessageDialog(palying, s);
 				return true;
 			}
 		}
 		return false;
+	}
+
+	public boolean isRun() {
+		return isRun;
+	}
+
+	public void setRun(boolean isRun) {
+		this.isRun = isRun;
 	}
 }

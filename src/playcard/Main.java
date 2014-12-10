@@ -2,6 +2,8 @@ package playcard;
 
 import java.awt.Button;
 import java.awt.FlowLayout;
+
+import play.Playing;
 import frame.LoginFrame;
 
 public class Main {
@@ -10,5 +12,7 @@ public class Main {
 
 		LoginFrame login = new LoginFrame();
 		login.setVisible(true);
+//		Playing play =new Playing();
+//		play.setVisible(true);
 	}
 }

@@ -16,16 +16,16 @@ public class Card extends JLabel implements MouseListener{
 	Playing playing;
 	
 	//图片url名字
-	String name;
+	public String name;
 	
 	//是否正反面
 	boolean up;
 	
 	//是否可被点击
-	private boolean canClick = false;
+	public boolean canClick = false;
 	
 	//是否被点击过
-	boolean clicked = false;
+	private boolean clicked = false;
 	
 	public Card(Playing play,String name,boolean up){
 		this.playing = play;
@@ -42,14 +42,14 @@ public class Card extends JLabel implements MouseListener{
 	}
 	
 	//设置卡牌背面
-	private void turnRear() {
+	public void turnRear() {
 		// TODO Auto-generated method stub
 		this.setIcon(new ImageIcon("images/rear.gif"));
 		this.up = false; 
 	}
 	
 	//设置卡牌正面
-	private void turnFront() {
+	public void turnFront() {
 		// TODO Auto-generated method stub
 		this.setIcon(new ImageIcon("images/"+name+".gif"));
 		this.up = true; 		
@@ -65,7 +65,7 @@ public class Card extends JLabel implements MouseListener{
 			Point from = this.getLocation();
 			//点击一次移动的距离
 			int step;
-			if(clicked)
+			if(isClicked())
 			{
 				step = -20;
 			}else
@@ -73,7 +73,7 @@ public class Card extends JLabel implements MouseListener{
 				step = 20;
 			}
 			//反向移动
-			clicked = !clicked;
+			setClicked(!isClicked());
 			this.setLocation(from.x, from.y-step);
 		}
 	}
@@ -114,6 +114,14 @@ public class Card extends JLabel implements MouseListener{
 	 */
 	public void setCanClick(boolean canClick) {
 		this.canClick = canClick;
+	}
+
+	public boolean isClicked() {
+		return clicked;
+	}
+
+	public void setClicked(boolean clicked) {
+		this.clicked = clicked;
 	}
 	
 }

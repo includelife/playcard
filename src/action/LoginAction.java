@@ -2,7 +2,7 @@ package action;
 
 import java.io.File;
 import java.util.Properties;
-import util.fileUtil;
+import util.FileUtil;
 
 public class LoginAction {
 	private String username = null;
@@ -33,7 +33,7 @@ public class LoginAction {
 		/*验证用户名和密码*/
 		userPro = new Properties();
 		file = new File("User.properties");		
-		fileUtil.loadPro(userPro, file);
+		FileUtil.loadPro(userPro, file);
 		
 		
 		

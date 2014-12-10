@@ -27,7 +27,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import util.fileUtil;
+import util.FileUtil;
 
 
 
@@ -123,7 +123,7 @@ public class RegisFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Properties userPro = new Properties();
 				File file = new File("User.properties");
-				fileUtil.loadPro(userPro, file);
+				FileUtil.loadPro(userPro, file);
 				
 				String u_name = textField.getText();
 				String u_pwd = new String(passwordField.getPassword());

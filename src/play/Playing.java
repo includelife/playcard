@@ -1,6 +1,8 @@
 package play;
 
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -8,16 +10,29 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.xml.stream.events.StartDocument;
 
+
+
+
+
+
+
+import frame.MainFrame;
 import playcard.Card;
+import playcard.CardType;
 import time.Time;
+import util.PlayUtil;
 
 public class Playing extends JFrame implements ActionListener{
 	
@@ -28,22 +43,22 @@ public class Playing extends JFrame implements ActionListener{
 	private JMenuItem start,exit,about;
 	
 	//抢地主按钮
-	private JButton landlord[] = new JButton[2]; 
+	public JButton landlord[] = new JButton[2]; 
 	
 	//出牌按钮
-	private JButton publishCard[] = new JButton[2];
+	public JButton publishCard[] = new JButton[2];
 	
 	//地主标志
-	int lordFlag;
-	int turn;
-	private JLabel lord;
-	private List<Card> currenList[] = new ArrayList[3];
-	private List<Card> playerList[] = new ArrayList[3];
-	private List<Card> lordList;	
+	public int lordFlag;
+	public int turn;
+	public JLabel lord;
+	public List<Card> currentList[] = new ArrayList[3];
+	public List<Card> playerList[] = new ArrayList[3];
+	public List<Card> lordList;	
 	private Card card[] = new Card[56];
-	private JTextField time[] = new JTextField[3];
-	private Time t;
-	private boolean nextPlayer = false;
+	public JTextField time[] = new JTextField[3];
+	public Time t;
+	public boolean nextPlayer = false;
 	
 	public Playing() {
 		// TODO Auto-generated constructor stub
@@ -52,13 +67,13 @@ public class Playing extends JFrame implements ActionListener{
 		this.setVisible(true);
 		CardInit();
 		getLord();
-		getTimefield()[1].setVisible(true);
+		time[1].setVisible(true);
 		SwingUtilities.invokeLater(new NewTimer(this,10));
 	}
 	
 	public void getLord(){
 		for (int i = 0; i < 2; i++) {
-			getLandlord()[i].setVisible(true);
+			landlord[i].setVisible(true);
 		}
 	}
 	
@@ -100,55 +115,108 @@ public class Playing extends JFrame implements ActionListener{
 			if(i>=52)//地主牌
 			{
 				//移动牌
+				PlayUtil.move(card[i], card[i].getLocation(),new Point(300+(i-52)*80,10));
 				lordList.add(card[i]);
 				continue;
 			}
 			switch ((t++)%3) {
 			case 0:
 				//左边玩家
-				//move
+				PlayUtil.move(card[i], card[i].getLocation(),new Point(50,60+i*5));
 				this.playerList[0].add(card[i]);
 				break;
 			case 1:
 				//自己
-				//move
+				PlayUtil.move(card[i], card[i].getLocation(),new Point(180+i*7,450));
 				this.playerList[1].add(card[i]);
+				//显示正面
+				card[i].turnFront();				
 				break;
 			case 2:
 				//右边玩家
-				//move
-				this.playerList[2].add(card[2]);
+				PlayUtil.move(card[i], card[i].getLocation(),new Point(700,60+i*5));
+				this.playerList[2].add(card[i]);
 				break;
 			}
-			container.setComponentZOrder(card[1], 0);
+			container.setComponentZOrder(card[i], 0);
 		}
 		//发完牌后，从大到小
 		for (int i = 0; i < 3; i++) {
 			//order
 			//rePosition
+			PlayUtil.order(playerList[i]);
+			PlayUtil.rePosition(this,playerList[i],i);//重新定位
 		}
-		this.lord = new JLabel("images/dizhu.gif");
+		this.lord = new JLabel(new ImageIcon("images/dizhu.gif"));
 		lord.setVisible(false);
 		lord.setSize(40,40);
 		container.add(lord);
 	}
 	
-
-	private void setMenu() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	//初始化窗体
 	private void Init() {
 		// TODO Auto-generated method stub
-		
+		this.setTitle("斗地主游戏");
+		this.setSize(830, 620);
+		setResizable(false);
+		setLocationRelativeTo(getOwner()); // 屏幕居中
+		container = this.getContentPane();
+		container.setLayout(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		container.setBackground(new Color(0, 112, 26)); // 背景为绿色
 	}
 
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	private void setMenu() {
 		// TODO Auto-generated method stub
+		JMenuBar jMenuBar = new JMenuBar();
+		JMenu game = new JMenu("游戏");
+		JMenu help = new JMenu("帮助");
+
+		start = new JMenuItem("新游戏");
+		exit = new JMenuItem("退出");
+		about = new JMenuItem("关于");
+
+		start.addActionListener(this);
+		exit.addActionListener(this);
+		about.addActionListener(this);
+
+		game.add(start);
+		game.add(exit);
+		help.add(about);
+
+		jMenuBar.add(game);
+		jMenuBar.add(help);
+		this.setJMenuBar(jMenuBar);
+		
+		landlord[0]=new JButton("抢地主");
+		landlord[1]=new JButton("不     抢");
+		publishCard[0]= new JButton("出牌");
+		publishCard[1]= new JButton("不要");
+		for(int i=0;i<2;i++)
+		{
+			publishCard[i].setBounds(320+i*100, 400, 60, 20);
+			landlord[i].setBounds(320+i*100, 400,75,20);
+			container.add(landlord[i]);
+			landlord[i].addActionListener(this);
+			landlord[i].setVisible(false);
+			container.add(publishCard[i]);
+			publishCard[i].setVisible(false);
+			publishCard[i].addActionListener(this);
+		}
+		for(int i=0;i<3;i++){
+			time[i]=new JTextField("倒计时:");
+			time[i].setVisible(false);
+			container.add(time[i]);
+		}
+		time[0].setBounds(140, 230, 60, 20);
+		time[1].setBounds(374, 360, 60, 20);
+		time[2].setBounds(620, 230, 60, 20);
+		
+		for(int i=0;i<3;i++)
+		{
+			currentList[i]=new ArrayList<Card>();
+		}
 		
 	}
 
@@ -215,10 +283,103 @@ public class Playing extends JFrame implements ActionListener{
 	public void setLordList(List<Card> lordList) {
 		this.lordList = lordList;
 	}
-	
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == exit){
+			this.dispose();
+		}
+		else if(e.getSource() == about){
+			JOptionPane.showMessageDialog(this, "made by huzhp");
+		}
+		else if(e.getSource() == start){
+			this.dispose();
+			MainFrame fr = new MainFrame();
+			fr.init();
+			fr.initSelect();
+			fr.setVisible(true);
+			//开始新游戏
+		}
+		if(e.getSource()==landlord[0])
+		{
+			time[1].setText("抢地主");
+			t.setRun(false);		
+		}
+		if(e.getSource()==landlord[1])
+		{
+			time[1].setText("不抢");
+			t.setRun(false);
+		}
+		//如果是不要
+		if(e.getSource()==publishCard[1])
+		{
+			this.nextPlayer=true;
+			currentList[1].clear();
+			time[1].setText("不要");		
+		}
+		
+		//如果是出牌按钮
+		if(e.getSource()==publishCard[0])
+		{
+			List<Card> c=new ArrayList<Card>();
+			//点选出牌
+			for(int i=0;i<playerList[1].size();i++)
+			{
+				Card card=playerList[1].get(i);
+				if(card.isClicked())
+				{
+					c.add(card);
+				}
+			}
+			int flag=0;
+			
+			//如果我主动出牌
+			if(time[0].getText().equals("不要")&&time[2].getText().equals("不要"))
+			{
+			
+				if(PlayUtil.jugdeType(c)!=CardType.c0)
+					flag=1;//表示可以出牌
+			}//如果我跟牌
+			else{
+			
+				flag=PlayUtil.checkCards(c,this.currentList);
+			}
+			//判断是否符合出牌
+			if(flag==1)
+			{
+				currentList[1]=c;
+				playerList[1].removeAll(currentList[1]);//移除走的牌
+				//定位出牌
+				Point point=new Point();
+				point.x=(770/2)-(currentList[1].size()+1)*15/2;;
+				point.y=300;
+				for(int i=0,len=currentList[1].size();i<len;i++)
+				{
+					Card card=currentList[1].get(i);
+					PlayUtil.move(card, card.getLocation(), point);
+					point.x+=15;
+				}
+				//抽完牌后重新整理牌
+				PlayUtil.rePosition(this, playerList[1], 1);
+				time[1].setVisible(false);
+				this.nextPlayer=true;
+			}
+
+		}
+	}
+	// 等待i秒
+	public void second(int i) {
+		try {
+			Thread.sleep(i * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
 
-	class NewTimer implements Runnable{
+class NewTimer implements Runnable{
 		
 		Playing playing;
 		int i;
@@ -234,5 +395,5 @@ public class Playing extends JFrame implements ActionListener{
 			playing.setTime(new Time(playing,10));	
 			playing.getTime().start();
 		}
-		
-	}
+}	
+

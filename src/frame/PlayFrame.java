@@ -9,12 +9,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import play.Playing;
+
 public class PlayFrame extends JFrame implements ActionListener {
 	private Container pane = null;
 	private JButton returnButton;
 	private JButton settingButton;
 	public PlayFrame(){
 		super();
+	}
+	public void init(String single){
+		Playing pfr = new Playing();
+		pfr.setVisible(true);
 	}
 	public void init(){
 		
