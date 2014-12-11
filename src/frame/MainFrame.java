@@ -119,8 +119,18 @@ public class MainFrame extends JFrame implements ActionListener{
 //			String s = new String();
 //			pfr.init(s);
 //			pfr.setVisible(true);
-			Playing play = new Playing();
-			play.setVisible(true);
+			
+			Runnable thread = new Runnable() {				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					Playing play = new Playing();
+					play.setVisible(true);
+				}
+			};
+			
+			Thread t = new Thread(thread);
+			t.start();
 		}else if(e.getSource() == multi){
 			JOptionPane.showMessageDialog(this, "¿ª·¢ÖÐ");
 		}else if(e.getSource() == help){
