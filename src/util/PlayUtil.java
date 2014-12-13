@@ -6,10 +6,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import Main.Card;
+import Main.CardType;
+import Main.Model;
 import play.Playing;
-import playcard.Card;
-import playcard.CardType;
-import playcard.Model;
 
 
 public class PlayUtil {

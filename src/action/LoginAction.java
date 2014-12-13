@@ -5,13 +5,13 @@ import java.util.Properties;
 import util.FileUtil;
 
 public class LoginAction {
-	private String username = null;
+	private static String username = null;
 	private String password = null;
 	private Properties userPro = null;
 	private File file = null;
 	public LoginAction(String username,String password){
 		super();
-		this.username = username;
+		this.setUsername(username);
 		this.password = password;		
 	}
 	
@@ -39,9 +39,9 @@ public class LoginAction {
 		
 		if(file.length() != 0)
 		{	
-			if(userPro.containsKey(this.username))
+			if(userPro.containsKey(this.getUsername()))
 			{
-				if((this.password).equals(userPro.getProperty(this.username)))
+				if((this.password).equals(userPro.getProperty(this.getUsername())))
 				{
 					check = true;
 				}else{   
@@ -57,6 +57,20 @@ public class LoginAction {
 			check = false;
 		}
 		return check;
+	}
+
+	/**
+	 * @return the username
+	 */
+	public static String getUsername() {
+		return username;
+	}
+
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 }

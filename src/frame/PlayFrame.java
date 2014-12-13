@@ -51,7 +51,7 @@ public class PlayFrame extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		if(e.getSource() == returnButton){
 			this.dispose();
-			MainFrame fr = new MainFrame();
+			SelectFrame fr = new SelectFrame();
 			fr.init();
 			fr.initSelect();
 			fr.setVisible(true);

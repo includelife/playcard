@@ -1,4 +1,4 @@
-package playcard;
+package Main;
 
 import java.awt.Button;
 import java.awt.FlowLayout;

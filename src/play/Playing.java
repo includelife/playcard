@@ -5,9 +5,11 @@ import java.awt.Container;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -18,6 +20,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.xml.stream.events.StartDocument;
@@ -28,10 +31,17 @@ import javax.xml.stream.events.StartDocument;
 
 
 
-import frame.MainFrame;
-import playcard.Card;
-import playcard.CardType;
+
+
+
+
+
+import action.LoginAction;
+import Main.Card;
+import Main.CardType;
+import frame.SelectFrame;
 import time.Time;
+import util.FileUtil;
 import util.PlayUtil;
 
 public class Playing extends JFrame implements ActionListener{
@@ -55,14 +65,27 @@ public class Playing extends JFrame implements ActionListener{
 	public List<Card> currentList[] = new ArrayList[3];
 	public List<Card> playerList[] = new ArrayList[3];
 	public List<Card> lordList;	
-	private Card card[] = new Card[56];
+	public Card card[] = new Card[56];
 	public JTextField time[] = new JTextField[3];
 	public Time t;
 	public boolean nextPlayer = false;
 	
+	private String users = null; 
+	private static String scores = null;
+
+	private Properties scorePro = null;
+
+	private File scorefile = null; 
+	
 	public Playing() {
 		// TODO Auto-generated constructor stub
+		InitGame();
+	}
+	
+	public void InitGame(){
 		Init();
+		//InitScore();
+		getScore();
 		setMenu();
 		this.setVisible(true);
 		CardInit();
@@ -71,12 +94,108 @@ public class Playing extends JFrame implements ActionListener{
 		SwingUtilities.invokeLater(new NewTimer(this,10));
 	}
 	
-	public void getLord(){
-		for (int i = 0; i < 2; i++) {
-			landlord[i].setVisible(true);
-		}
+	//初始化窗体
+	private void Init() {
+		// TODO Auto-generated method stub
+		this.setTitle("斗地主游戏");
+		this.setSize(830, 620);
+		setResizable(false);
+		setLocationRelativeTo(getOwner()); // 屏幕居中
+		container = this.getContentPane();
+		container.setLayout(null);		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		container.setBackground(new Color(0, 112, 26)); // 背景为绿色
 	}
 	
+	private void getScore(){
+		users = LoginAction.getUsername();
+		scorePro = new Properties();
+		scorefile = new File("Score.properties");		
+		FileUtil.loadPro(scorePro, scorefile);		
+		setScores(scorePro.getProperty(users));
+	}
+	//初始化分数窗口
+	private void InitScore(){
+		getScore();
+		JPanel scorePanel = new JPanel();
+		scorePanel.setBounds(0, 0, 150, 50);
+		scorePanel.setBackground(Color.white);
+		scorePanel.setLayout(null);
+		JLabel user = new JLabel();
+		JLabel puser = new JLabel();
+		JLabel score = new JLabel();
+		JLabel pscore = new JLabel();
+		user.setText("玩家");
+		score.setText("分数");
+		puser.setText(users);
+		pscore.setText(getScores());
+		
+		user.setBounds(20, 2, 50, 20);	
+		puser.setBounds(20, 25, 50, 20);	
+		score.setBounds(90, 2, 50, 20);
+		pscore.setBounds(90, 25, 50, 20);
+		
+		scorePanel.add(user);
+		scorePanel.add(score);
+		scorePanel.add(puser);
+		scorePanel.add(pscore);
+		container.add(scorePanel);
+		
+	}
+	
+	//初始化菜单
+	private void setMenu() {
+		// TODO Auto-generated method stub
+		JMenuBar jMenuBar = new JMenuBar();
+		JMenu game = new JMenu("游戏");
+		JMenu help = new JMenu("帮助");
+
+		start = new JMenuItem("新游戏");
+		exit = new JMenuItem("退出");
+		about = new JMenuItem("关于");
+
+		start.addActionListener(this);
+		exit.addActionListener(this);
+		about.addActionListener(this);
+
+		game.add(start);
+		game.add(exit);
+		help.add(about);
+
+		jMenuBar.add(game);
+		jMenuBar.add(help);
+		this.setJMenuBar(jMenuBar);
+		
+		landlord[0]=new JButton("抢地主");
+		landlord[1]=new JButton("不     抢");
+		publishCard[0]= new JButton("出牌");
+		publishCard[1]= new JButton("不要");
+		for(int i=0;i<2;i++)
+		{
+			publishCard[i].setBounds(320+i*100, 400, 60, 20);
+			landlord[i].setBounds(320+i*100, 400,75,20);
+			container.add(landlord[i]);
+			landlord[i].addActionListener(this);
+			landlord[i].setVisible(false);
+			container.add(publishCard[i]);
+			publishCard[i].setVisible(false);
+			publishCard[i].addActionListener(this);
+		}
+		for(int i=0;i<3;i++){
+			time[i]=new JTextField("倒计时:");
+			time[i].setVisible(false);
+			container.add(time[i]);
+		}
+		time[0].setBounds(140, 230, 60, 20);
+		time[1].setBounds(374, 360, 60, 20);
+		time[2].setBounds(620, 230, 60, 20);
+		
+		for(int i=0;i<3;i++)
+		{
+			currentList[i]=new ArrayList<Card>();
+		}
+		
+	}
 	
 	//发牌洗牌
 	private void CardInit() {
@@ -153,137 +272,25 @@ public class Playing extends JFrame implements ActionListener{
 		container.add(lord);
 	}
 	
+	//抢地主
+	private void getLord(){
+		for (int i = 0; i < 2; i++) {
+			landlord[i].setVisible(true);
+		}
+	}
 	
-	//初始化窗体
-	private void Init() {
-		// TODO Auto-generated method stub
-		this.setTitle("斗地主游戏");
-		this.setSize(830, 620);
-		setResizable(false);
-		setLocationRelativeTo(getOwner()); // 屏幕居中
-		container = this.getContentPane();
-		container.setLayout(null);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		container.setBackground(new Color(0, 112, 26)); // 背景为绿色
+	//重新开始游戏
+	public void reStart()
+	{
+		this.dispose();
+	    // TODO Auto-generated method stub
+		SelectFrame reselect = new SelectFrame();
+		reselect.init();
+		reselect.initSelect();
+		reselect.setVisible(true);	
 	}
 
-	private void setMenu() {
-		// TODO Auto-generated method stub
-		JMenuBar jMenuBar = new JMenuBar();
-		JMenu game = new JMenu("游戏");
-		JMenu help = new JMenu("帮助");
-
-		start = new JMenuItem("新游戏");
-		exit = new JMenuItem("退出");
-		about = new JMenuItem("关于");
-
-		start.addActionListener(this);
-		exit.addActionListener(this);
-		about.addActionListener(this);
-
-		game.add(start);
-		game.add(exit);
-		help.add(about);
-
-		jMenuBar.add(game);
-		jMenuBar.add(help);
-		this.setJMenuBar(jMenuBar);
-		
-		landlord[0]=new JButton("抢地主");
-		landlord[1]=new JButton("不     抢");
-		publishCard[0]= new JButton("出牌");
-		publishCard[1]= new JButton("不要");
-		for(int i=0;i<2;i++)
-		{
-			publishCard[i].setBounds(320+i*100, 400, 60, 20);
-			landlord[i].setBounds(320+i*100, 400,75,20);
-			container.add(landlord[i]);
-			landlord[i].addActionListener(this);
-			landlord[i].setVisible(false);
-			container.add(publishCard[i]);
-			publishCard[i].setVisible(false);
-			publishCard[i].addActionListener(this);
-		}
-		for(int i=0;i<3;i++){
-			time[i]=new JTextField("倒计时:");
-			time[i].setVisible(false);
-			container.add(time[i]);
-		}
-		time[0].setBounds(140, 230, 60, 20);
-		time[1].setBounds(374, 360, 60, 20);
-		time[2].setBounds(620, 230, 60, 20);
-		
-		for(int i=0;i<3;i++)
-		{
-			currentList[i]=new ArrayList<Card>();
-		}
-		
-	}
-
-	public Time getTime() {
-		return t;
-	}
-
-	public void setTime(Time t) {
-		this.t = t;
-	}
-
-	/**
-	 * @return the time
-	 */
-	public JTextField[] getTimefield() {
-		return time;
-	}
-
-	/**
-	 * @param time the time to set
-	 */
-	public void setTimefield(JTextField time[]) {
-		this.time = time;
-	}
-
-	/**
-	 * @return the playerList
-	 */
-	public List<Card>[] getPlayerList() {
-		return playerList;
-	}
-
-	/**
-	 * @param playerList the playerList to set
-	 */
-	public void setPlayerList(List<Card> playerList[]) {
-		this.playerList = playerList;
-	}
-
-	/**
-	 * @return the landlord
-	 */
-	public JButton[] getLandlord() {
-		return landlord;
-	}
-
-	/**
-	 * @param landlord the landlord to set
-	 */
-	public void setLandlord(JButton landlord[]) {
-		this.landlord = landlord;
-	}
-
-	/**
-	 * @return the lordList
-	 */
-	public List<Card> getLordList() {
-		return lordList;
-	}
-
-	/**
-	 * @param lordList the lordList to set
-	 */
-	public void setLordList(List<Card> lordList) {
-		this.lordList = lordList;
-	}
-
+	//实现鼠标点击监听接口
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -295,10 +302,7 @@ public class Playing extends JFrame implements ActionListener{
 		}
 		else if(e.getSource() == start){
 			this.dispose();
-			MainFrame fr = new MainFrame();
-			fr.init();
-			fr.initSelect();
-			fr.setVisible(true);
+			this.reStart();
 			//开始新游戏
 		}
 		if(e.getSource()==landlord[0])
@@ -365,9 +369,9 @@ public class Playing extends JFrame implements ActionListener{
 				time[1].setVisible(false);
 				this.nextPlayer=true;
 			}
-
 		}
 	}
+	
 	// 等待i秒
 	public void second(int i) {
 		try {
@@ -376,6 +380,85 @@ public class Playing extends JFrame implements ActionListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	//get,set方法
+	public Time getTime() {
+		return t;
+	}
+
+	public void setTime(Time t) {
+		this.t = t;
+	}
+
+	/**
+	 * @return the time
+	 */
+	public JTextField[] getTimefield() {
+		return time;
+	}
+
+	/**
+	 * @param time the time to set
+	 */
+	public void setTimefield(JTextField time[]) {
+		this.time = time;
+	}
+
+	/**
+	 * @return the playerList
+	 */
+	public List<Card>[] getPlayerList() {
+		return playerList;
+	}
+
+	/**
+	 * @param playerList the playerList to set
+	 */
+	public void setPlayerList(List<Card> playerList[]) {
+		this.playerList = playerList;
+	}
+
+	/**
+	 * @return the landlord
+	 */
+	public JButton[] getLandlord() {
+		return landlord;
+	}
+
+	/**
+	 * @param landlord the landlord to set
+	 */
+	public void setLandlord(JButton landlord[]) {
+		this.landlord = landlord;
+	}
+
+	/**
+	 * @return the lordList
+	 */
+	public List<Card> getLordList() {
+		return lordList;
+	}
+
+	/**
+	 * @param lordList the lordList to set
+	 */
+	public void setLordList(List<Card> lordList) {
+		this.lordList = lordList;
+	}
+
+	/**
+	 * @return the scores
+	 */
+	public static String getScores() {
+		return scores;
+	}
+
+	/**
+	 * @param scores the scores to set
+	 */
+	public static void setScores(String scores) {
+		Playing.scores = scores;
 	}
 }
 

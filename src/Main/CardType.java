@@ -1,4 +1,4 @@
-package playcard;
+package Main;
 
 public enum CardType {
 

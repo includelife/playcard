@@ -120,10 +120,17 @@ public class RegisFrame extends JFrame {
 		});
 		//×¢²á°´Å¥¼àÌý
 		newButton_1.addActionListener(new ActionListener() {
+			private Properties scorePro;
+			private File scorefile;
+
 			public void actionPerformed(ActionEvent e) {
 				Properties userPro = new Properties();
 				File file = new File("User.properties");
 				FileUtil.loadPro(userPro, file);
+				
+				scorePro = new Properties();
+				scorefile = new File("Score.properties");
+				FileUtil.loadPro(scorePro, scorefile);
 				
 				String u_name = textField.getText();
 				String u_pwd = new String(passwordField.getPassword());
@@ -147,9 +154,11 @@ public class RegisFrame extends JFrame {
 				if (u_pwd.equals(u_pwd_ag)) {
 					if (u_pwd.length() != 0) {
 						userPro.setProperty(u_name, u_pwd_ag);
+						scorePro.setProperty(u_name, "0");
 						try {
 							userPro.store(new FileOutputStream(file),
 									"created by huzhp");
+							scorePro.store(new FileOutputStream(scorefile), "stored the scores");
 							JOptionPane.showMessageDialog(contentPane, "¹§Ï²Äã£¬×¢²á³É¹¦£¡");
 						} catch (FileNotFoundException e1) {
 							// TODO Auto-generated catch block

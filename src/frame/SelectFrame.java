@@ -3,26 +3,37 @@ package frame;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
+import action.LoginAction;
 import play.Playing;
+import util.FileUtil;
 
-public class MainFrame extends JFrame implements ActionListener{
+public class SelectFrame extends JFrame implements ActionListener{
 	private Container pane = null;
 	private JButton single = null;
 	private JButton multi = null;
 	private JButton help = null;
-	private JButton langue = null;
+	private JButton search = null;
 	private JButton rebutton = null;
+	private String users;
+	private Properties scorePro;
+	private File scorefile;
+	private String scores;
 	
-	public MainFrame() {		
+	public SelectFrame() {		
 		super();
 	}
 	
@@ -79,30 +90,78 @@ public class MainFrame extends JFrame implements ActionListener{
 		single = new JButton("单人模式");
 		multi = new JButton("多人模式");
 		help = new JButton("帮  助");
-		langue = new JButton("语  言");
+		search = new JButton("分数查询");
 		rebutton = new JButton("返 回");
 		
 		single.setBounds(365, 190, 100, 40);
 		multi.setBounds(365, 190+50, 100, 40);
-		help.setBounds(365, 190+50*2, 100, 40);
-		langue.setBounds(365, 190+50*3, 100, 40);
+		help.setBounds(365, 190+50*3, 100, 40);
+		search.setBounds(365, 190+50*2, 100, 40);
 		rebutton.setBounds(365, 190+50*4, 100, 40);
 		
 		single.addActionListener(this);
 		multi.addActionListener(this);
 		help.addActionListener(this);
-		langue.addActionListener(this);
+		search.addActionListener(this);
 		rebutton.addActionListener(this);
 
 		backgroundLabel.add(single);
 		backgroundLabel.add(multi);
 		backgroundLabel.add(help);
-		backgroundLabel.add(langue);
+		backgroundLabel.add(search);
 		backgroundLabel.add(rebutton);
 
 		this.getContentPane().add(backgroundLabel);
 	}
 	
+	//获得分数
+	private void getScore(){
+		users = LoginAction.getUsername();
+		scorePro = new Properties();
+		scorefile = new File("Score.properties");		
+		FileUtil.loadPro(scorePro, scorefile);	
+		
+		scores = scorePro.getProperty(users);
+	}
+	
+	private void InitScore(){
+		
+		JFrame scorefr = new JFrame();
+		Toolkit tk = getToolkit();
+		Dimension dim = tk.getScreenSize();
+		scorefr.setResizable(false);
+		scorefr.setBounds(dim.width/2-225,dim.height/2-150,450,300);
+		validate();
+		scorefr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		getScore();
+		JPanel scorePanel = new JPanel();
+		scorePanel.setBounds(0, 0, 150, 50);
+		scorePanel.setBackground(Color.white);
+		scorePanel.setLayout(null);
+		JLabel user = new JLabel();
+		JLabel puser = new JLabel();
+		JLabel score = new JLabel();
+		JLabel pscore = new JLabel();
+		user.setText("玩家");
+		score.setText("分数");
+		puser.setText(users);
+		pscore.setText(scores);
+		
+		user.setBounds(20, 2, 50, 20);	
+		puser.setBounds(20, 25, 50, 20);	
+		score.setBounds(90, 2, 50, 20);
+		pscore.setBounds(90, 25, 50, 20);
+		
+		scorePanel.add(user);
+		scorePanel.add(score);
+		scorePanel.add(puser);
+		scorePanel.add(pscore);
+		
+		scorefr.add(scorePanel);
+		scorefr.setVisible(true);
+		
+	}
 
 	private static final long serialVersionUID = 1L;
 	/**
@@ -115,10 +174,6 @@ public class MainFrame extends JFrame implements ActionListener{
 		if(e.getSource() == single){
 			//JOptionPane.showMessageDialog(this, "单人模式");
 			this.dispose();
-//			PlayFrame pfr = new PlayFrame();
-//			String s = new String();
-//			pfr.init(s);
-//			pfr.setVisible(true);
 			
 			Runnable thread = new Runnable() {				
 				@Override
@@ -135,8 +190,8 @@ public class MainFrame extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, "开发中");
 		}else if(e.getSource() == help){
 			JOptionPane.showMessageDialog(this, "您需要什么帮助？");
-		}else if(e.getSource() == langue){
-			JOptionPane.showMessageDialog(this, "开发中");	
+		}else if(e.getSource() == search){
+			InitScore();	
 		}else if(e.getSource() == rebutton){
 			this.dispose();
 			LoginFrame fr = new LoginFrame();

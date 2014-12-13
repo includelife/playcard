@@ -1,4 +1,4 @@
-package playcard;
+package Main;
 
 public class Player {
 

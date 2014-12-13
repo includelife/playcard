@@ -152,9 +152,20 @@ public class LoginFrame extends JFrame implements ActionListener{
 		if (login.isLogin()) {// 登录成功
 			progressBar.dispose();
 			this.dispose();// 释放本窗口资源
-//			Playing play = new Playing();
-//			play.setVisible(true);
-			MainFrame fr = new MainFrame();
+			
+//			Runnable thread = new Runnable() {				
+//				@Override
+//				public void run() {
+//					// TODO Auto-generated method stub
+//					Playing play = new Playing();
+//					play.setVisible(true);
+//				}
+//			};
+//			
+//			Thread t = new Thread(thread);
+//			t.start();
+			
+			SelectFrame fr = new SelectFrame();
 			fr.init();
 			fr.initSelect();
 			fr.setVisible(true);			

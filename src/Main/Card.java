@@ -1,4 +1,4 @@
-package playcard;
+package Main;
 
 import java.awt.Point;
 import java.awt.event.MouseListener;

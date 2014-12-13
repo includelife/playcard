@@ -1,21 +1,30 @@
 package time;
 
 import java.awt.Point;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
+import action.LoginAction;
+import Main.Card;
+import Main.CardType;
+import Main.Model;
 import play.Playing;
-import playcard.Card;
-import playcard.CardType;
-import playcard.Model;
+import util.FileUtil;
 import util.PlayUtil;
 
 public class Time extends Thread{
-	Playing palying;
+	public Playing palying;
 	private boolean isRun = true;
 	int i = 10;
+	private String users;
+	private Properties scorePro;
+	private File scorefile;
 
 	public Time(Playing play, int i) {
 		this.palying = play;
@@ -40,7 +49,7 @@ public class Time extends Thread{
 			// 得到地主牌
 			palying.playerList[1].addAll(palying.lordList);
 			openlord(true);
-			second(2);// 等待五秒
+			second(3);// 等待3秒
 			PlayUtil.order(palying.playerList[1]);
 			PlayUtil.rePosition(palying, palying.playerList[1], 1);
 			setlord(1);
@@ -91,7 +100,19 @@ public class Time extends Thread{
 				turnOn(false);//选完关闭
 				palying.turn=(palying.turn+1)%3;
 				if(win())//判断输赢
+				{
+//					this.palying.container.removeAll();
+//					Runnable thread = new Runnable() {				
+//						@Override
+//						public void run() {
+//							// TODO Auto-generated method stub
+//							palying.InitGame();
+//						}
+//					};				
+//					Thread t = new Thread(thread);
+//					t.start();
 					break;
+				}
 			}
 			if (palying.turn==0) 
 			{
@@ -498,17 +519,52 @@ public class Time extends Thread{
 	}
 	//判断输赢
 	public boolean win(){
+		String score;
+		score = Playing.getScores();
+		int pscore = Integer.valueOf(score);
+		
+		users = LoginAction.getUsername();
+		scorePro = new Properties();
+		scorefile = new File("Score.properties");		
+		FileUtil.loadPro(scorePro, scorefile);		
+		
 		for(int i=0;i<3;i++){
 			if(palying.playerList[i].size()==0)
 			{
 				String s;
 				if(i==1)
 				{
-					s="恭喜你，胜利了!";
+					s="恭喜你，胜利了!你的分数加3";
+					pscore += 3;					
+					scorePro.setProperty(users, String.valueOf(pscore));
+					try {
+						scorePro.store(new FileOutputStream(scorefile), "plus 3 scores");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}else {
-					s="恭喜电脑"+i+",赢了! 你的智商有待提高哦";
+					s="很遗憾，你输了!你的分数减3";
+					pscore -= 3;
+					scorePro.setProperty(users, String.valueOf(pscore));
+					try {
+						scorePro.store(new FileOutputStream(scorefile), "subtract 3 scores");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				JOptionPane.showMessageDialog(palying, s);
+				this.palying.container.removeAll();
+				Runnable thread = new Runnable() {				
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						palying.InitGame();
+					}
+				};				
+				Thread t = new Thread(thread);
+				t.start();
 				return true;
 			}
 		}
