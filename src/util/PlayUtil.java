@@ -11,9 +11,17 @@ import Main.CardType;
 import Main.Model;
 import play.Playing;
 
-
+/**
+ * 游戏时常用的方法
+ *
+ */
 public class PlayUtil {
-	//判断牌型
+	
+   		/**
+		 * 判断牌型
+		 * @param list
+		 * @return
+		 */
 		public static CardType jugdeType(List<Card> list){
 			//因为之前排序过所以比较好判断
 			int len=list.size();
@@ -75,8 +83,7 @@ public class PlayUtil {
 				//飞机带n单,n/2对
 				if(card_index.a[2].size()==len/4 &&
 						((Integer)(card_index.a[2].get(len/4-1))-(Integer)(card_index.a[2].get(0))==len/4-1))
-					return CardType.c11122234;
-					
+					return CardType.c11122234;					
 				//飞机带n双
 				if(card_index.a[2].size()==len/5 && card_index.a[2].size()==len/5 &&
 						((Integer)(card_index.a[2].get(len/5-1))-(Integer)(card_index.a[2].get(0))==len/5-1))
@@ -86,7 +93,12 @@ public class PlayUtil {
 			return CardType.c0;
 		}
 		
-		//移动效果的函数,用于发牌
+		/**
+		 * 移动效果，用于发牌
+		 * @param card
+		 * @param from
+		 * @param to
+		 */
 		public static void move(Card card,Point from,Point to){
 			if(to.x!=from.x){
 				double k=(1.0)*(to.y-from.y)/(to.x-from.x);
@@ -113,7 +125,11 @@ public class PlayUtil {
 			//位置校准
 			card.setLocation(to);
 		}
-		//对list排序
+
+		/**
+		 * 对list排序
+		 * @param list
+		 */
 		public static void order(List<Card> list){
 			Collections.sort(list,new Comparator<Card>() {
 				@Override
@@ -143,7 +159,13 @@ public class PlayUtil {
 				}
 			});
 		}
-		//重新定位 flag代表电脑1 ,2 或者是我
+		
+		/**
+		 * 重新定位,flag代表电脑1,2，或者是自己
+		 * @param play
+		 * @param list
+		 * @param flag
+		 */
 		public static void rePosition(Playing play,List<Card> list,int flag){
 			Point p=new Point();
 			if(flag==0)
@@ -171,7 +193,12 @@ public class PlayUtil {
 				
 			}
 		}
-		//地主牌权值，看是否抢地主
+		
+		/**
+		 * 地主牌权值，判断是否抢地主
+		 * @param list
+		 * @return
+		 */
 		public static int getScore(List<Card> list){
 			int count=0;
 			for(int i=0,len=list.size();i<len;i++){
@@ -190,11 +217,21 @@ public class PlayUtil {
 			return count;
 			
 		}
-		//返回花色
+		
+		/**
+		 * 返回花色
+		 * @param card
+		 * @return
+		 */
 		public static int getColor(Card card){
 			return Integer.parseInt(card.name.substring(0,1));
 		}
-		//返回值
+
+		/**
+		 * 返回牌值
+		 * @param card
+		 * @return
+		 */
 		public static int getValue(Card card){
 			int i= Integer.parseInt(card.name.substring(2,card.name.length()));
 			if(card.name.substring(2,card.name.length()).equals("2"))
@@ -205,7 +242,12 @@ public class PlayUtil {
 				i+=2;//是王
 			return i;
 		}
-		//得到最大相同数
+		
+		/**
+		 * 得到最大相同数
+		 * @param card_index
+		 * @param list
+		 */
 		public static void getMax(Card_index card_index,List<Card> list){
 			int count[]=new int[14];//1-13各算一种,王算第14种
 			for(int i=0;i<14;i++)
@@ -234,7 +276,12 @@ public class PlayUtil {
 				}
 			}
 		}
-		//拆牌
+
+		/**
+		 * 拆牌
+		 * @param list
+		 * @return
+		 */
 		public static Model getModel(List<Card> list){
 			//先复制一个list
 			List list2=new ArrayList<Card>(list);
@@ -255,7 +302,12 @@ public class PlayUtil {
 			PlayUtil.getSingle(list2, model);
 			return model;
 		}
-		//拆连子
+
+		/**
+		 * 拆连子
+		 * @param list
+		 * @param model
+		 */	
 		public static void get123(List<Card> list,Model model){
 			List<Card> del=new ArrayList<Card>();//要删除的Cards
 			if(list.size()>0&&(PlayUtil.getValue(list.get(0))<7 ||PlayUtil.getValue(list.get(list.size()-1))>10))
@@ -287,7 +339,12 @@ public class PlayUtil {
 			}
 			list.removeAll(del);
 		}
-		//拆双顺
+
+		/**
+		 * 拆双顺
+		 * @param list
+		 * @param model
+		 */
 		public static void getTwoTwo(List<Card> list,Model model){
 			List<String> del=new ArrayList<String>();//要删除的Cards
 			//从model里面的对子找
@@ -323,7 +380,12 @@ public class PlayUtil {
 			}
 			l.removeAll(del);
 		}
-		//拆飞机
+
+		/**
+		 * 拆飞机
+		 * @param list
+		 * @param model
+		 */
 		public static void getPlane(List<Card> list,Model model){
 			List<String> del=new ArrayList<String>();//要删除的Cards
 			//从model里面的3带找
@@ -358,7 +420,12 @@ public class PlayUtil {
 			}
 			l.removeAll(del);
 		}
-		//拆炸弹
+		
+		/**
+		 * 拆炸弹
+		 * @param list
+		 * @param model
+		 */
 		public static void getBoomb(List<Card> list,Model model){
 			List<Card> del=new ArrayList<Card>();//要删除的Cards
 			//王炸
@@ -391,7 +458,12 @@ public class PlayUtil {
 			}
 			list.removeAll(del);
 		}
-		//拆3带
+		
+		/**
+		 * 拆3带
+		 * @param list
+		 * @param model
+		 */
 		public static void getThree(List<Card> list,Model model){
 			List<Card> del=new ArrayList<Card>();//要删除的Cards
 			//连续3张相同
@@ -409,7 +481,12 @@ public class PlayUtil {
 			}
 			list.removeAll(del);
 		}
-		//拆对子
+
+		/**
+		 * 拆对子
+		 * @param list
+		 * @param model
+		 */
 		public static void getTwo(List<Card> list,Model model){
 			List<Card> del=new ArrayList<Card>();//要删除的Cards
 			//连续2张相同
@@ -426,7 +503,12 @@ public class PlayUtil {
 			}
 			list.removeAll(del);
 		}
-		//拆单牌
+
+		/**
+		 * 拆单牌
+		 * @param list
+		 * @param model
+		 */
 		public static void getSingle(List<Card> list,Model model){
 			List<Card> del=new ArrayList<Card>();//要删除的Cards
 			//1
@@ -436,13 +518,23 @@ public class PlayUtil {
 				}
 			list.removeAll(del);
 		}
-		//隐藏之前出过的牌
+
+		/**
+		 * 隐藏之前出过的牌
+		 * @param list
+		 */
 		public static void hideCards(List<Card> list){
 			for(int i=0,len=list.size();i<len;i++){
 				list.get(i).setVisible(false);
 			}
 		}
-		//检查牌的是否能出
+
+		/**
+		 * 检查牌是否能出
+		 * @param c
+		 * @param current
+		 * @return
+		 */
 		public static int checkCards(List<Card> c,List<Card>[] current){
 			//找出当前最大的牌是哪个电脑出的,c是点选的牌
 			List<Card> currentlist=(current[0].size()>0)?current[0]:current[2];
@@ -493,7 +585,12 @@ public class PlayUtil {
 			}
 			return 1;
 		}
-		//按照重复次数排序
+
+		/**
+		 * 按照重复次数排序
+		 * @param list
+		 * @return
+		 */
 		public static List getOrder2(List<Card> list){
 			List<Card> list2=new ArrayList<Card>(list);
 			List<Card> list3=new ArrayList<Card>();

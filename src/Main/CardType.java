@@ -1,5 +1,11 @@
 package Main;
 
+/**
+ * 斗地主出牌的种类
+ * 采用枚举型
+ * @author huzhp
+ *
+ */
 public enum CardType {
 
 		c1,//单牌。

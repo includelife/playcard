@@ -8,8 +8,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
+/**
+ * 文件读写操作的常用方法
+ * @author huzhp
+ *
+ */
 public class FileUtil {
-
+	
+	/**
+	 * 如果文件不存在，则创建；如果存在，则打开
+	 * @param pro
+	 * @param file
+	 */
 	// Properties加载文件信息
 	public static void loadPro(Properties pro, File file) {
 		if (!file.exists()) {
@@ -31,6 +41,10 @@ public class FileUtil {
 		}
 	}
 	
+	/**
+	 * 获取系统时间
+	 * @return
+	 */
 	@SuppressWarnings("unused")
 	public static String getTimer() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

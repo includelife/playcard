@@ -18,6 +18,11 @@ import play.Playing;
 import util.FileUtil;
 import util.PlayUtil;
 
+/**
+ * AI
+ * @author huzhp
+ *
+ */
 public class Time extends Thread{
 	public Playing palying;
 	private boolean isRun = true;
@@ -30,10 +35,12 @@ public class Time extends Thread{
 		this.palying = play;
 		this.i = i;
 	}
-
+	
+	/**
+	 * 开始抢地主
+	 */
 	@Override
 	public void run() {
-
 		while (i > -1 && isRun()) {
 			palying.time[1].setText("倒计时:" + i--);
 			second(1);// 等一秒
@@ -80,7 +87,8 @@ public class Time extends Thread{
 
 			}
 		}
-		// 选完地主后 关闭地主按钮
+		
+		// 选完地主后 关闭地主按钮		
 		palying.landlord[0].setVisible(false);
 		palying.landlord[1].setVisible(false);
 		turnOn(false);
@@ -89,7 +97,10 @@ public class Time extends Thread{
 			palying.time[i].setText("不要");
 			palying.time[i].setVisible(false);
 		}
-		// 开始游戏 根据地主不同顺序不同
+		
+		/**
+		 * 开始正式游戏，根据地主不同顺序不同
+		 */
 		palying.turn=palying.lordFlag;
 		while (true) {
 			
@@ -131,7 +142,10 @@ public class Time extends Thread{
 		}
 	}
 
-	// 等待i秒
+	/**
+	 * 等待i秒
+	 * @param i
+	 */
 	public void second(int i) {
 		try {
 			Thread.sleep(i * 1000);
@@ -141,7 +155,10 @@ public class Time extends Thread{
 		}
 	}
 
-	// 地主牌翻看
+	/**
+	 * 地主牌翻看
+	 * @param is
+	 */
 	public void openlord(boolean is) {
 		for (int i = 0; i < 3; i++) {
 			if (is)
@@ -153,7 +170,10 @@ public class Time extends Thread{
 		}
 	}
 
-	// 设定地主
+	/**
+	 * 设定地主
+	 * @param i
+	 */
 	public void setlord(int i) {
 		Point point = new Point();
 		if (i == 1)// 我是地主
@@ -176,27 +196,37 @@ public class Time extends Thread{
 		palying.lord.setVisible(true);
 	}
 
-	// 打开出牌按钮
+	/**
+	 * 打开出牌按钮
+	 * @param flag
+	 */
 	public void turnOn(boolean flag) {
 		palying.publishCard[0].setVisible(flag);
 		palying.publishCard[1].setVisible(flag);
 	}
 
-	// 电脑0走牌(我代表1)
+	/**
+	 * 电脑0走牌(我代表1)
+	 */
 	public void computer0() {
 		timeWait(1, 0); // 定时
 		ShowCard(0); // 出牌
 		
 	}
 
-	// 电脑2走牌(我代表1)
+	/**
+	 * 电脑2走牌(我代表1)
+	 */
 	public void computer2() {
 		timeWait(1, 2); // 定时
 		ShowCard(2); // 出牌
 		
 	}
 
-	// 走牌
+	/**
+	 * 走牌
+	 * @param role
+	 */
 	public void ShowCard(int role) {
 		Model model = PlayUtil.getModel(palying.playerList[role]);
 		// 待走的牌
@@ -328,7 +358,9 @@ public class Time extends Thread{
 			}
 		}
 
-		// 定位出牌
+		/**
+		 * 定位出牌
+		 */
 		palying.currentList[role].clear();
 		if (list.size() > 0) {
 			Point point = new Point();
@@ -357,7 +389,12 @@ public class Time extends Thread{
 			card.turnFront();
 	}
 
-	// 按name获得Card，方便从Model取出
+	/**
+	 * 按name获得Card，方便从Model取出
+	 * @param list
+	 * @param n
+	 * @return
+	 */
 	public List getCardByName(List<Card> list, String n) {
 		String[] name = n.split(",");
 		List cardsList = new ArrayList<Card>();
@@ -371,7 +408,14 @@ public class Time extends Thread{
 		}
 		return cardsList;
 	}
-	//顺子
+
+	/**
+	 * 顺子
+	 * @param model
+	 * @param player
+	 * @param list
+	 * @param role
+	 */
 	public void AI_3(List<String> model,List<Card> player,List<String> list,int role){
 		
 		for(int i=0,len=model.size();i<len;i++)
@@ -384,7 +428,15 @@ public class Time extends Thread{
 			}
 		}
 	}
-	//飞机带单，双
+
+	/**
+	 * 飞机带单，双
+	 * @param model1
+	 * @param model2
+	 * @param player
+	 * @param list
+	 * @param role
+	 */
 	public void AI_4(List<String> model1,List<String> model2,List<Card> player,List<String> list,int role){
 		//排序按重复数
 		player=PlayUtil.getOrder2(player);
@@ -404,7 +456,15 @@ public class Time extends Thread{
 			}
 		}
 	}
-	//4带1，2
+
+	/**
+	 * 4带1，2
+	 * @param model1
+	 * @param model2
+	 * @param player
+	 * @param list
+	 * @param role
+	 */
 	public void AI_5(List<String> model1,List<String> model2,List<Card> player,List<String> list,int role){
 		//排序按重复数
 		player=PlayUtil.getOrder2(player);
@@ -422,7 +482,14 @@ public class Time extends Thread{
 			}
 		}
 	}
-	//单牌，对子，3个，4个,通用
+
+	/**
+	 * 单牌，对子，3个，4个,通用
+	 * @param model
+	 * @param player
+	 * @param list
+	 * @param role
+	 */
 	public void AI_1(List<String> model,List<Card> player,List<String> list,int role){
 		//顶家
 		if((role+1)%3==palying.lordFlag)
@@ -448,7 +515,15 @@ public class Time extends Thread{
 			}
 		}
 	}
-	//3带1,2,4带1,2
+
+	/**
+	 * 3带1,2,4带1,2
+	 * @param model1
+	 * @param model2
+	 * @param player
+	 * @param list
+	 * @param role
+	 */
 	public void AI_2(List<String> model1,List<String> model2,List<Card> player,List<String> list,int role){
 		//model1是主牌,model2是带牌,player是玩家出的牌,,list是准备回的牌
 		//排序按重复数
@@ -476,7 +551,12 @@ public class Time extends Thread{
 		if(list.size()<2)
 			list.clear();
 	}
-	// 延时，模拟时钟
+
+	/**
+	 * 延时，模拟时钟
+	 * @param n
+	 * @param player
+	 */
 	public void timeWait(int n, int player) {
 
 		if (palying.currentList[player].size() > 0)
@@ -506,7 +586,12 @@ public class Time extends Thread{
 		}
 		palying.time[player].setVisible(false);
 	}
-	//通过name估值
+
+	/**
+	 * 通过name估值
+	 * @param n
+	 * @return
+	 */
 	public  int getValueInt(String n){
 		String name[]=n.split(",");
 		String s=name[0];
@@ -517,7 +602,11 @@ public class Time extends Thread{
 			i+=13;
 		return i;
 	}
-	//判断输赢
+
+	/**
+	 * 判断输赢
+	 * @return
+	 */
 	public boolean win(){
 		String score;
 		score = Playing.getScores();
@@ -571,6 +660,10 @@ public class Time extends Thread{
 		return false;
 	}
 
+	/**
+	 * 以下是get,set方法
+	 * @return
+	 */
 	public boolean isRun() {
 		return isRun;
 	}

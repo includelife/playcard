@@ -21,6 +21,12 @@ import action.LoginAction;
 import play.Playing;
 import util.FileUtil;
 
+/**
+ * 游戏选择界面
+ * @author huzhp
+ *
+ */
+
 public class SelectFrame extends JFrame implements ActionListener{
 	private Container pane = null;
 	private JButton single = null;
@@ -53,35 +59,13 @@ public class SelectFrame extends JFrame implements ActionListener{
 		Font myfont = new Font("宋体",Font.CENTER_BASELINE,60);
 		titleLabel.setFont(myfont);
 		titleLabel.setBounds(200, 35, 700, 200);
-		this.getContentPane().add(titleLabel);
-		
-//		JLabel backgroundLabel = new JLabel();
-//		backgroundLabel.setBounds(0, 0, 800, 600);
-//		backgroundLabel.setLayout(null);
-//		
-//		single = new JButton("单人模式");
-//		multi = new JButton("多人模式");
-//		help = new JButton("帮  助");
-//		langue = new JButton("语  言");
-//		
-//		single.setBounds(365, 190, 100, 40);
-//		multi.setBounds(365, 190+50, 100, 40);
-//		help.setBounds(365, 190+50*2, 100, 40);
-//		langue.setBounds(365, 190+50*3, 100, 40);
-//		
-//		single.addActionListener(this);
-//		multi.addActionListener(this);
-//		help.addActionListener(this);
-//		langue.addActionListener(this);
-//
-//		backgroundLabel.add(single);
-//		backgroundLabel.add(multi);
-//		backgroundLabel.add(help);
-//		backgroundLabel.add(langue);
-//
-//		this.getContentPane().add(backgroundLabel);
+		this.getContentPane().add(titleLabel);		
+
 	}	
 	
+	/**
+	 * 界面元素初始化
+	 */
 	public void initSelect(){
 		JLabel backgroundLabel = new JLabel();
 		backgroundLabel.setBounds(0, 0, 800, 600);
@@ -124,6 +108,9 @@ public class SelectFrame extends JFrame implements ActionListener{
 		scores = scorePro.getProperty(users);
 	}
 	
+	/**
+	 * 分数界面初始化
+	 */
 	private void InitScore(){
 		
 		JFrame scorefr = new JFrame();
@@ -165,9 +152,12 @@ public class SelectFrame extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	/**
-	 * 
+	 * 这个属性不太清楚
 	 */
 
+	/**
+	 * 实现ActionListener接口
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -187,12 +177,16 @@ public class SelectFrame extends JFrame implements ActionListener{
 			Thread t = new Thread(thread);
 			t.start();
 		}else if(e.getSource() == multi){
+			//多人模式
 			JOptionPane.showMessageDialog(this, "开发中");
 		}else if(e.getSource() == help){
+			//帮助
 			JOptionPane.showMessageDialog(this, "您需要什么帮助？");
 		}else if(e.getSource() == search){
+			//查询分数
 			InitScore();	
 		}else if(e.getSource() == rebutton){
+			//返回登陆界面
 			this.dispose();
 			LoginFrame fr = new LoginFrame();
 			fr.setVisible(true);

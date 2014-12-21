@@ -18,17 +18,22 @@ import javax.swing.JTextField;
 import play.Playing;
 import action.LoginAction;
 
-//import frame.JProgressBarFrame;
+/**
+ * 登陆框架
+ * @author huzhp
+ *
+ */
 
 public class LoginFrame extends JFrame implements ActionListener{
 	/**
-	 * 
+	 * 这个属性不太清楚
 	 */
 	private static final long serialVersionUID = 1L;
-	/**
-	 * 
-	 */
 	
+	/**
+	 *声明输入名字和密码的文本框
+	 *声明登陆按钮，重置按钮，注册按钮
+	 */
 	private JTextField nameTF;
 	private JPasswordField passwordTF;
 	private JButton loginButton = null, resetButton = null;
@@ -40,6 +45,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		// TODO Auto-generated constructor stub
 		super();
 		getContentPane().setLayout(null);
+		//初始化界面
 		jFrameValidate(); 
 		
 		setTitle("登录游戏");
@@ -152,19 +158,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		if (login.isLogin()) {// 登录成功
 			progressBar.dispose();
 			this.dispose();// 释放本窗口资源
-			
-//			Runnable thread = new Runnable() {				
-//				@Override
-//				public void run() {
-//					// TODO Auto-generated method stub
-//					Playing play = new Playing();
-//					play.setVisible(true);
-//				}
-//			};
-//			
-//			Thread t = new Thread(thread);
-//			t.start();
-			
+				
 			SelectFrame fr = new SelectFrame();
 			fr.init();
 			fr.initSelect();
@@ -177,6 +171,9 @@ public class LoginFrame extends JFrame implements ActionListener{
 		}
 	}
 
+	/**
+	 * 得到输入的值
+	 */
 	@SuppressWarnings("deprecation")
 	protected void getValues() {
 		// TODO Auto-generated method stub

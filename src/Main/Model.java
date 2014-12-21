@@ -3,6 +3,11 @@ package Main;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 出牌模型
+ * @author huzhp
+ *
+ */
 public class Model {
 	//一组牌
 	int value; //权值

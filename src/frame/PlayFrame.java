@@ -10,8 +10,16 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import play.Playing;
-
+/**
+ * 斗地主游戏的主要界面
+ * @author huzhp
+ *
+ */
 public class PlayFrame extends JFrame implements ActionListener {
+	/**
+	 * 声明游戏面板
+	 * 声明返回按钮，设置按钮等
+	 */
 	private Container pane = null;
 	private JButton returnButton;
 	private JButton settingButton;
@@ -22,6 +30,10 @@ public class PlayFrame extends JFrame implements ActionListener {
 		Playing pfr = new Playing();
 		pfr.setVisible(true);
 	}
+	
+	/**
+	 * 面板初始化
+	 */
 	public void init(){
 		
 		this.setTitle("斗地主");
@@ -46,6 +58,10 @@ public class PlayFrame extends JFrame implements ActionListener {
 		pane.add(settingButton);
 		
 	}
+	
+	/**
+	 * 实现ActionListener接口的方法
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

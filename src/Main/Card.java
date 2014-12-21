@@ -10,6 +10,11 @@ import org.w3c.dom.events.MouseEvent;
 
 import play.Playing;
 
+/**
+ * 卡牌属性设置
+ * @author huzhp
+ *
+ */
 public class Card extends JLabel implements MouseListener{
 	
 	//Main类的引用
@@ -27,6 +32,12 @@ public class Card extends JLabel implements MouseListener{
 	//是否被点击过
 	private boolean clicked = false;
 	
+	/**
+	 * 传入play引用，卡牌名字，是正面还是反面
+	 * @param play
+	 * @param name
+	 * @param up
+	 */
 	public Card(Playing play,String name,boolean up){
 		this.playing = play;
 		this.name = name;

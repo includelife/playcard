@@ -5,6 +5,10 @@ import java.util.Properties;
 import util.FileUtil;
 
 public class LoginAction {
+	/**
+	 * 声明用户名，密码
+	 * 此处采用文件存储
+	 */
 	private static String username = null;
 	private String password = null;
 	private Properties userPro = null;
@@ -15,6 +19,10 @@ public class LoginAction {
 		this.password = password;		
 	}
 	
+	/**
+	 * 验证用户名和密码
+	 * @return
+	 */
 	public boolean isLogin() {
 		// TODO Auto-generated method stub
 		boolean isLogin = false;
@@ -25,7 +33,8 @@ public class LoginAction {
 		}
 		return isLogin;
 	}
-
+	
+	
 	private boolean checkUser() {
 		// TODO Auto-generated method stub
 		boolean check = false;
@@ -35,8 +44,10 @@ public class LoginAction {
 		file = new File("User.properties");		
 		FileUtil.loadPro(userPro, file);
 		
-		
-		
+		/**
+		 *如果文件不存在，创建
+		 *如果文件存在则查找
+		 */
 		if(file.length() != 0)
 		{	
 			if(userPro.containsKey(this.getUsername()))

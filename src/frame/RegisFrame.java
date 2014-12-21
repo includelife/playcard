@@ -29,7 +29,11 @@ import javax.swing.border.EmptyBorder;
 
 import util.FileUtil;
 
-
+/**
+ * 注册界面
+ * @author huzhp
+ *
+ */
 
 public class RegisFrame extends JFrame {
 	private JPanel contentPane;
@@ -187,6 +191,9 @@ public class RegisFrame extends JFrame {
 		this.dispose();
 	}
 	
+	/**
+	 * 界面初始化
+	 */
 	private void jFrameValidate() {
 		// TODO Auto-generated method stub
 		Toolkit tk = getToolkit();
@@ -197,7 +204,6 @@ public class RegisFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
-
 
 	public void init() {
 		

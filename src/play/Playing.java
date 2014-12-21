@@ -44,6 +44,11 @@ import time.Time;
 import util.FileUtil;
 import util.PlayUtil;
 
+/**
+ * 游戏界面
+ * @author huzhp
+ *
+ */
 public class Playing extends JFrame implements ActionListener{
 	
     //定义容器	
@@ -82,6 +87,9 @@ public class Playing extends JFrame implements ActionListener{
 		InitGame();
 	}
 	
+	/**
+	 * 游戏初始化
+	 */
 	public void InitGame(){
 		Init();
 		//InitScore();
@@ -94,7 +102,9 @@ public class Playing extends JFrame implements ActionListener{
 		SwingUtilities.invokeLater(new NewTimer(this,10));
 	}
 	
-	//初始化窗体
+	/**
+	 * 游戏面板初始化
+	 */
 	private void Init() {
 		// TODO Auto-generated method stub
 		this.setTitle("斗地主游戏");
@@ -107,6 +117,9 @@ public class Playing extends JFrame implements ActionListener{
 		container.setBackground(new Color(0, 112, 26)); // 背景为绿色
 	}
 	
+	/**
+	 * 获得分数
+	 */
 	private void getScore(){
 		users = LoginAction.getUsername();
 		scorePro = new Properties();
@@ -114,7 +127,10 @@ public class Playing extends JFrame implements ActionListener{
 		FileUtil.loadPro(scorePro, scorefile);		
 		setScores(scorePro.getProperty(users));
 	}
-	//初始化分数窗口
+	
+	/**
+	 * 初始化分数界面
+	 */
 	private void InitScore(){
 		getScore();
 		JPanel scorePanel = new JPanel();
@@ -143,7 +159,9 @@ public class Playing extends JFrame implements ActionListener{
 		
 	}
 	
-	//初始化菜单
+	/**
+	 * 初始化菜单
+	 */
 	private void setMenu() {
 		// TODO Auto-generated method stub
 		JMenuBar jMenuBar = new JMenuBar();
@@ -197,7 +215,9 @@ public class Playing extends JFrame implements ActionListener{
 		
 	}
 	
-	//发牌洗牌
+	/**
+	 * 发牌洗牌
+	 */
 	private void CardInit() {
 		// TODO Auto-generated method stub
 		int count = 1;
@@ -272,14 +292,18 @@ public class Playing extends JFrame implements ActionListener{
 		container.add(lord);
 	}
 	
-	//抢地主
+	/**
+	 * 抢地主
+	 */
 	private void getLord(){
 		for (int i = 0; i < 2; i++) {
 			landlord[i].setVisible(true);
 		}
 	}
 	
-	//重新开始游戏
+	/**
+	 * 重新开始游戏
+	 */
 	public void reStart()
 	{
 		this.dispose();
@@ -290,7 +314,10 @@ public class Playing extends JFrame implements ActionListener{
 		reselect.setVisible(true);	
 	}
 
-	//实现鼠标点击监听接口
+
+	/**
+	 * 实现ActionListener接口
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -372,7 +399,10 @@ public class Playing extends JFrame implements ActionListener{
 		}
 	}
 	
-	// 等待i秒
+	/**
+	 * 等待i秒
+	 * @param i
+	 */
 	public void second(int i) {
 		try {
 			Thread.sleep(i * 1000);
@@ -462,6 +492,11 @@ public class Playing extends JFrame implements ActionListener{
 	}
 }
 
+/**
+ * 通过实现Runnable接口，创建新的线程
+ * @author huzhp
+ *
+ */
 class NewTimer implements Runnable{
 		
 		Playing playing;
