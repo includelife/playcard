@@ -2,8 +2,15 @@ package action;
 
 import java.io.File;
 import java.util.Properties;
+
+import db.DBQuery;
 import util.FileUtil;
 
+/**
+ * 实现登陆功能
+ * @author huzhp
+ *
+ */
 public class LoginAction {
 	/**
 	 * 声明用户名，密码
@@ -16,7 +23,7 @@ public class LoginAction {
 	public LoginAction(String username,String password){
 		super();
 		this.setUsername(username);
-		this.password = password;		
+		this.setPassword(password);		
 	}
 	
 	/**
@@ -39,34 +46,51 @@ public class LoginAction {
 		// TODO Auto-generated method stub
 		boolean check = false;
 		
-		/*验证用户名和密码*/
-		userPro = new Properties();
-		file = new File("User.properties");		
-		FileUtil.loadPro(userPro, file);
-		
-		/**
-		 *如果文件不存在，创建
-		 *如果文件存在则查找
-		 */
-		if(file.length() != 0)
-		{	
-			if(userPro.containsKey(this.getUsername()))
+//	/******************************************* 采用数据库 **********************************************/
+		try {
+			DBQuery userquery = new DBQuery(this.username);
+			String pass = userquery.getPassword();
+			if(pass.equals(this.password))
 			{
-				if((this.password).equals(userPro.getProperty(this.getUsername())))
-				{
-					check = true;
-				}else{   
-					//密码错误
-					check = false;
-				}
-			}else{
-				//用户名不存在
-				check = false;
+				check=true;
 			}
-		}else{
-			//用户名不存在
-			check = false;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+ 
+//	/*******************************************采用文件********************************************/	 
+//		
+//		/*验证用户名和密码*/
+//		userPro = new Properties();
+//		file = new File("User.properties");		
+//		FileUtil.loadPro(userPro, file);
+//		
+//		/**
+//		 *如果文件不存在，创建
+//		 *如果文件存在则查找
+//		 */
+//		if(file.length() != 0)
+//		{	
+//			if(userPro.containsKey(this.getUsername()))
+//			{
+//				if((this.password).equals(userPro.getProperty(this.getUsername())))
+//				{
+//					check = true;
+//				}else{   
+//					//密码错误
+//					check = false;
+//				}
+//			}else{
+//				//用户名不存在
+//				check = false;
+//			}
+//		}else{
+//			//用户名不存在
+//			check = false;
+//		}
+		
 		return check;
 	}
 
@@ -82,6 +106,20 @@ public class LoginAction {
 	 */
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }

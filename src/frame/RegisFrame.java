@@ -27,6 +27,8 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import db.DBQuery;
+import db.DBWrite1;
 import util.FileUtil;
 
 /**
@@ -128,62 +130,119 @@ public class RegisFrame extends JFrame {
 			private File scorefile;
 
 			public void actionPerformed(ActionEvent e) {
-				Properties userPro = new Properties();
-				File file = new File("User.properties");
-				FileUtil.loadPro(userPro, file);
-				
-				scorePro = new Properties();
-				scorefile = new File("Score.properties");
-				FileUtil.loadPro(scorePro, scorefile);
-				
 				String u_name = textField.getText();
 				String u_pwd = new String(passwordField.getPassword());
-				String u_pwd_ag = new String(passwordField_1.getPassword());
-
-				// 判断用户名是否在普通用户中已存在
-				if (u_name.length() != 0) {
-					
-					if (userPro.containsKey(u_name)) {
-						newLabel.setText("用户名已存在!");
-					} else {
-						isPassword(userPro, file, u_name, u_pwd, u_pwd_ag);
+				String u_pwd_ag = new String(passwordField_1.getPassword());				
+//  /************************************采用数据库*****************************************************/
+				if(u_name.length() != 0)
+				{
+					try {
+						DBQuery userquery = new DBQuery(u_name);
+						String pass = userquery.getPassword();
+						//密码不为空，说明用户名已经存在
+						if(pass!=null)
+						{
+							newLabel.setText("用户名已存在!");
+						}else{
+							isPassword2(u_name,u_pwd,u_pwd_ag);
+						}
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
-				} else {
+				}else{
 					newLabel.setText("用户名不能为空！");
 				}
 			}
-			
-			private void isPassword(Properties userPro,
-					File file, String u_name, String u_pwd, String u_pwd_ag) {
-				if (u_pwd.equals(u_pwd_ag)) {
-					if (u_pwd.length() != 0) {
-						userPro.setProperty(u_name, u_pwd_ag);
-						scorePro.setProperty(u_name, "0");
-						try {
-							userPro.store(new FileOutputStream(file),
-									"created by huzhp");
-							scorePro.store(new FileOutputStream(scorefile), "stored the scores");
-							JOptionPane.showMessageDialog(contentPane, "恭喜你，注册成功！");
-						} catch (FileNotFoundException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+				
+				/**
+				 * 验证用户名和密码是否合法
+				 * 注册
+				 * @param u_name
+				 * @param u_pwd
+				 * @param u_pwd_ag
+				 */
+				private void isPassword2(String u_name, String u_pwd, String u_pwd_ag) {
+					// TODO Auto-generated method stub
+					if(u_pwd.equals(u_pwd_ag))
+					{
+						if(u_pwd.length()!=0)
+						{
+							try {
+								DBWrite1 userWrite = new DBWrite1(u_name,u_pwd);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							newButton_1.setEnabled(false);
+							//返回登陆界面
+							LoginFrame fr = new LoginFrame();
+							fr.setVisible(true);
+							exit();
+						}else
+						{
+							newLabel.setText("密码为空！");
 						}
-						newButton_1.setEnabled(false);
-						//返回登陆界面
-						LoginFrame fr = new LoginFrame();
-						fr.setVisible(true);
-						exit();
-					} else {
-						newLabel.setText("密码为空！");
+					}else
+					{
+						newLabel.setText("密码不一致！");
 					}
-				} else {
-					newLabel.setText("密码不一致！");
 				}
-			}
 		});
+						
+//  /************************************采用文件******************************************************/				
+//				Properties userPro = new Properties();
+//				File file = new File("User.properties");
+//				FileUtil.loadPro(userPro, file);
+//				
+//				scorePro = new Properties();
+//				scorefile = new File("Score.properties");
+//				FileUtil.loadPro(scorePro, scorefile);
+//				
+//				// 判断用户名是否在普通用户中已存在
+//				if (u_name.length() != 0) {
+//					
+//					if (userPro.containsKey(u_name)) {
+//						newLabel.setText("用户名已存在!");
+//					} else {
+//						isPassword(userPro, file, u_name, u_pwd, u_pwd_ag);
+//					}
+//				} else {
+//					newLabel.setText("用户名不能为空！");
+//				}
+//			}
+//			
+//			private void isPassword(Properties userPro,
+//					File file, String u_name, String u_pwd, String u_pwd_ag) {
+//				if (u_pwd.equals(u_pwd_ag)) {
+//					if (u_pwd.length() != 0) {
+//						userPro.setProperty(u_name, u_pwd_ag);
+//						scorePro.setProperty(u_name, "0");
+//						try {
+//							userPro.store(new FileOutputStream(file),
+//									"created by huzhp");
+//							scorePro.store(new FileOutputStream(scorefile), "stored the scores");
+//							JOptionPane.showMessageDialog(contentPane, "恭喜你，注册成功！");
+//						} catch (FileNotFoundException e1) {
+//							// TODO Auto-generated catch block
+//							e1.printStackTrace();
+//						} catch (IOException e1) {
+//							// TODO Auto-generated catch block
+//							e1.printStackTrace();
+//						}
+//						newButton_1.setEnabled(false);
+//						//返回登陆界面
+//						LoginFrame fr = new LoginFrame();
+//						fr.setVisible(true);
+//						exit();
+//					} else {
+//						newLabel.setText("密码为空！");
+//					}
+//				} else {
+//					newLabel.setText("密码不一致！");
+//				}
+//			}
+//		});
 		
 	}
 	
@@ -206,7 +265,9 @@ public class RegisFrame extends JFrame {
 	}
 
 	public void init() {
-		
+		/**
+		 * 空函数
+		 */
 	}
 
 }

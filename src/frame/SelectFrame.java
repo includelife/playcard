@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import db.DBQuery;
 import action.LoginAction;
 import play.Playing;
 import util.FileUtil;
@@ -100,12 +101,16 @@ public class SelectFrame extends JFrame implements ActionListener{
 	
 	//获得分数
 	private void getScore(){
+//  /***********************************采用数据库*********************************************/	
 		users = LoginAction.getUsername();
-		scorePro = new Properties();
-		scorefile = new File("Score.properties");		
-		FileUtil.loadPro(scorePro, scorefile);	
-		
-		scores = scorePro.getProperty(users);
+		DBQuery scorequery = new DBQuery(users,"score");
+		scores = scorequery.getScore();
+//  /***********************************采用文件**********************************************/		
+//		users = LoginAction.getUsername();
+//		scorePro = new Properties();
+//		scorefile = new File("Score.properties");		
+//		FileUtil.loadPro(scorePro, scorefile);			
+//		scores = scorePro.getProperty(users);
 	}
 	
 	/**

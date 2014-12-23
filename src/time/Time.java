@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
+import db.DBUpdate;
 import action.LoginAction;
 import Main.Card;
 import Main.CardType;
@@ -624,24 +625,40 @@ public class Time extends Thread{
 				if(i==1)
 				{
 					s="恭喜你，胜利了!你的分数加3";
-					pscore += 3;					
-					scorePro.setProperty(users, String.valueOf(pscore));
+					pscore += 3;
+//  /***************************采用数据库********************************************************/					
 					try {
-						scorePro.store(new FileOutputStream(scorefile), "plus 3 scores");
-					} catch (IOException e) {
+						DBUpdate scoreupdate = new DBUpdate(users,String.valueOf(pscore));
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+//  /**************************************采用文件******************************************/					
+//					scorePro.setProperty(users, String.valueOf(pscore));
+//					try {
+//						scorePro.store(new FileOutputStream(scorefile), "plus 3 scores");
+//					} catch (IOException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
 				}else {
 					s="很遗憾，你输了!你的分数减3";
 					pscore -= 3;
-					scorePro.setProperty(users, String.valueOf(pscore));
+//  /****************************************采用数据库***************************************/
 					try {
-						scorePro.store(new FileOutputStream(scorefile), "subtract 3 scores");
-					} catch (IOException e) {
+						DBUpdate scoreupdate = new DBUpdate(users,String.valueOf(pscore));
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+//  /**************************************采用文件******************************************/
+//					scorePro.setProperty(users, String.valueOf(pscore));
+//					try {
+//						scorePro.store(new FileOutputStream(scorefile), "subtract 3 scores");
+//					} catch (IOException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
 				}
 				JOptionPane.showMessageDialog(palying, s);
 				this.palying.container.removeAll();

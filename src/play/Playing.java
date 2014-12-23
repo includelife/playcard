@@ -2,6 +2,7 @@ package play;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +37,9 @@ import javax.xml.stream.events.StartDocument;
 
 
 
+
+
+import db.DBQuery;
 import action.LoginAction;
 import Main.Card;
 import Main.CardType;
@@ -71,7 +75,8 @@ public class Playing extends JFrame implements ActionListener{
 	public List<Card> playerList[] = new ArrayList[3];
 	public List<Card> lordList;	
 	public Card card[] = new Card[56];
-	public JTextField time[] = new JTextField[3];
+	//public JTextField time[] = new JTextField[3];
+	public JLabel time[] = new JLabel[3];
 	public Time t;
 	public boolean nextPlayer = false;
 	
@@ -122,10 +127,13 @@ public class Playing extends JFrame implements ActionListener{
 	 */
 	private void getScore(){
 		users = LoginAction.getUsername();
-		scorePro = new Properties();
-		scorefile = new File("Score.properties");		
-		FileUtil.loadPro(scorePro, scorefile);		
-		setScores(scorePro.getProperty(users));
+		DBQuery scorequery = new DBQuery(users,"score");
+		scores = scorequery.getScore();
+		
+//		scorePro = new Properties();
+//		scorefile = new File("Score.properties");		
+//		FileUtil.loadPro(scorePro, scorefile);		
+//		setScores(scorePro.getProperty(users));
 	}
 	
 	/**
@@ -190,17 +198,20 @@ public class Playing extends JFrame implements ActionListener{
 		publishCard[1]= new JButton("不要");
 		for(int i=0;i<2;i++)
 		{
-			publishCard[i].setBounds(320+i*100, 400, 60, 20);
+			publishCard[i].setBounds(420-i*100, 400, 60, 20);
 			landlord[i].setBounds(320+i*100, 400,75,20);
 			container.add(landlord[i]);
 			landlord[i].addActionListener(this);
 			landlord[i].setVisible(false);
-			container.add(publishCard[i]);
+			container.add(publishCard[i]); 
 			publishCard[i].setVisible(false);
 			publishCard[i].addActionListener(this);
 		}
 		for(int i=0;i<3;i++){
-			time[i]=new JTextField("倒计时:");
+			time[i]=new JLabel("倒计时:");
+			//Font font = new Font(arg0, arg1, arg2);
+			//time[i].setFont(font);
+			time[i].setForeground(Color.white);
 			time[i].setVisible(false);
 			container.add(time[i]);
 		}
@@ -424,14 +435,14 @@ public class Playing extends JFrame implements ActionListener{
 	/**
 	 * @return the time
 	 */
-	public JTextField[] getTimefield() {
+	public JLabel[] getTimefield() {
 		return time;
 	}
 
 	/**
 	 * @param time the time to set
 	 */
-	public void setTimefield(JTextField time[]) {
+	public void setTimefield(JLabel time[]) {
 		this.time = time;
 	}
 
