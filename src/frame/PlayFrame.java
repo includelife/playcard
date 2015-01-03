@@ -43,7 +43,7 @@ public class PlayFrame extends JFrame implements ActionListener {
 		pane = this.getContentPane();
 		pane.setLayout(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		pane.setBackground(new Color(0, 112, 26)); // 背景为绿色
+		pane.setBackground(new Color(44, 114, 104)); // 背景为绿色
 		
 		returnButton = new JButton("返 回");
 		settingButton = new JButton("设 置");

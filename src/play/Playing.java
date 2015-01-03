@@ -58,7 +58,7 @@ public class Playing extends JFrame implements ActionListener{
     //定义容器	
 	public Container container = null;
 	
-	//定义菜单按钮
+	//定义菜单按钮  
 	private JMenuItem start,exit,about;
 	
 	//抢地主按钮
@@ -119,7 +119,7 @@ public class Playing extends JFrame implements ActionListener{
 		container = this.getContentPane();
 		container.setLayout(null);		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		container.setBackground(new Color(0, 112, 26)); // 背景为绿色
+		container.setBackground(new Color(44, 114, 104)); // 背景为绿色
 	}
 	
 	/**

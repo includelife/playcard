@@ -6,8 +6,7 @@ import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import org.w3c.dom.events.MouseEvent;
-
+import multi.GamePanel;
 import play.Playing;
 
 /**
@@ -19,10 +18,34 @@ public class Card extends JLabel implements MouseListener{
 	
 	//Main类的引用
 	Playing playing;
-	
+	GamePanel gamepanel;
 	//图片url名字
 	public String name;
 	
+	public Playing getPlaying() {
+		return playing;
+	}
+
+	public void setPlaying(Playing playing) {
+		this.playing = playing;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean isUp() {
+		return up;
+	}
+
+	public void setUp(boolean up) {
+		this.up = up;
+	}
+
 	//是否正反面
 	boolean up;
 	
@@ -40,6 +63,25 @@ public class Card extends JLabel implements MouseListener{
 	 */
 	public Card(Playing play,String name,boolean up){
 		this.playing = play;
+		this.name = name;
+		this.up = up;
+		if(this.up){
+			this.turnFront();
+		}else{
+			this.turnRear();
+		}
+		this.setSize(71,96);
+		this.setVisible(true);
+		this.addMouseListener(this);	
+	}
+	/**
+	 * 传入gamepanel引用,卡牌名字，是正面还是反面
+	 * @param gamepanel
+	 * @param name
+	 * @param up
+	 */
+	public Card(GamePanel gamepanel,String name,boolean up){
+		this.gamepanel = gamepanel;
 		this.name = name;
 		this.up = up;
 		if(this.up){

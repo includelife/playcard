@@ -16,6 +16,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import play.Playing;
+import Main.UserBean;
 import action.LoginAction;
 
 /**
@@ -105,7 +106,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		//把背景标签添加进内容面板
 		getContentPane().add(backgroundLabel);
 		
-		getContentPane().setBackground(new Color(0, 112, 26));
+		getContentPane().setBackground(new Color(44, 114, 104));
 		progressBar = new JProgressBarFrame(this, "登录", "登录中，请稍后...");
 		
 		reset();// 默认初始值
@@ -193,6 +194,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 	 */
 	public void setUsername(String username) {
 		this.username = username;
+		UserBean user = new UserBean(username); 
 	}
 
 	/**

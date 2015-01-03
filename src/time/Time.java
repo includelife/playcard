@@ -36,7 +36,7 @@ public class Time extends Thread{
 		this.palying = play;
 		this.i = i;
 	}
-	
+	 
 	/**
 	 * 开始抢地主
 	 */

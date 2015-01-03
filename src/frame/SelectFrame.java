@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import multi.GameFrame;
 import db.DBQuery;
 import action.LoginAction;
 import play.Playing;
@@ -52,7 +53,7 @@ public class SelectFrame extends JFrame implements ActionListener{
 		setResizable(false);
 		setLocationRelativeTo(getOwner()); // 屏幕居中
 		pane.setLayout(null);
-		pane.setBackground(new Color(0, 112, 26)); // 背景为绿色		
+		pane.setBackground(new Color(44, 114, 104)); // 背景为绿色		
 		
 		//标题标签
 		final JLabel titleLabel = new JLabel();
@@ -177,13 +178,15 @@ public class SelectFrame extends JFrame implements ActionListener{
 					Playing play = new Playing();
 					play.setVisible(true);
 				}
-			};
-			
+			};			
 			Thread t = new Thread(thread);
 			t.start();
 		}else if(e.getSource() == multi){
 			//多人模式
-			JOptionPane.showMessageDialog(this, "开发中");
+//			JOptionPane.showMessageDialog(this, "开发中");
+			GameFrame gameframe = new GameFrame();
+			this.dispose();
+			gameframe.MultiStart();
 		}else if(e.getSource() == help){
 			//帮助
 			JOptionPane.showMessageDialog(this, "您需要什么帮助？");
