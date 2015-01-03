@@ -13,7 +13,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import Main.UserBean;
+import main.UserBean;
 import frame.LoginFrame;
 
 
@@ -60,8 +60,10 @@ public class GameFrame extends JFrame{
 		initGUI();
 	}
 
+	/**
+	 *  添加各个功能模块,并初始化其状态
+	 */
 	private void initGUI() {
-		// 添加各个功能模块,并初始化其状态
 		try {
 			/*public void setResizable(boolean resizable)设置此窗体是否可由用户调整大小。 
                                    参数：
@@ -163,7 +165,11 @@ public class GameFrame extends JFrame{
 		}
 	}
 	
-	//开启服务端，等待客户端发出连接请求
+	/**
+	 * 开启服务端，等待客户端发出连接请求
+	 * @param serverPort
+	 * @throws Exception
+	 */
 	private void startServerThread(String serverPort) throws Exception {
 		ServerSocket server = new ServerSocket(new Integer(serverPort));
 		prepare.setIsConnect(true);
@@ -172,6 +178,12 @@ public class GameFrame extends JFrame{
 		serverthread.start();
 	}
 	
+	/**
+	 * 开启客户端
+	 * @param serverIP
+	 * @param serverPort
+	 * @throws Exception
+	 */
     private void startClientThread(String serverIP, String serverPort)
 			throws Exception {
     	//定义客户端对象

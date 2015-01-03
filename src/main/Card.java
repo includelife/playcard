@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import java.awt.Point;
 import java.awt.event.MouseListener;
@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import backup.Player;
 import multi.GamePanel;
 import play.Playing;
 
@@ -94,6 +95,10 @@ public class Card extends JLabel implements MouseListener{
 		this.addMouseListener(this);	
 	}
 	
+	public Card(Player player, String name2, boolean up2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	//…Ë÷√ø®≈∆±≥√Ê
 	public void turnRear() {
 		// TODO Auto-generated method stub

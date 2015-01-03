@@ -6,9 +6,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import Main.Card;
-import Main.CardType;
-import Main.Model;
+import backup.Player;
+import main.Card;
+import main.CardType;
+import main.Model;
 import play.Playing;
 
 /**
@@ -620,6 +621,11 @@ public class PlayUtil {
 				a[max]=0;
 			}
 			return list3;
+		}
+
+		public static void rePosition(Player player, List<Card> list, int flag) {
+			// TODO Auto-generated method stub
+			
 		}
 		
 }

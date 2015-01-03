@@ -20,7 +20,12 @@ public class PreparePanel extends JPanel{
 		private String[] playernames = new String[3];
 		private int width;
 
-		//构造方法
+		/**
+		 * 构造方法
+		 * @param name
+		 * @param width
+		 * @param height
+		 */
 		public PreparePanel(String name, int width, int height) {
 			super();
 			this.playernames[0] = name;
@@ -35,7 +40,9 @@ public class PreparePanel extends JPanel{
 			return playernames;
 		}
 
-		//初始化界面
+		/**
+		 * 初始化界面
+		 */
 		private void initGUI() {
 			try {
 				GroupLayout thisLayout = new GroupLayout(this);

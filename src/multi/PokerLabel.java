@@ -33,8 +33,10 @@ public class PokerLabel extends JLabel{
 		return pokerID;
 	}
 
+	/**
+	 * 设置该标签的大小
+	 */
 	public void initGUI() {
-		//设置该标签的大小
 		this.setSize(width, height);
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
@@ -52,12 +54,16 @@ public class PokerLabel extends JLabel{
 
 			}
 
-			//鼠标进入事件
+			/**
+			 * 鼠标进入事件
+			 */
 			public void mouseEntered(MouseEvent evt) {
 				//鼠标进入标签时，设置该标签的边框
 				setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
 			}
-            //鼠标离开事件
+            /**
+             * 鼠标离开事件
+             */
 			public void mouseExited(MouseEvent evt) {
 				//鼠标离开标签时，就将该标签的边框去除
 				setBorder(null);

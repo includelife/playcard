@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 /**
  * 斗地主出牌的种类

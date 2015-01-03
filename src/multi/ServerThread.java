@@ -35,7 +35,10 @@ public class ServerThread extends Thread{
 	// 控制出牌顺序
 	Integer turn;
 
-	//构造方法
+	/**
+	 * 构造方法
+	 * @param server
+	 */
 	public ServerThread(ServerSocket server) {
 		//继承基类方法
 		super();
@@ -47,8 +50,11 @@ public class ServerThread extends Thread{
 		}
 	}
 
+	/**
+	 *  如果当前玩家选择地主，则分别告知其他玩家，并让当前玩家出牌
+	 * @throws Exception
+	 */
 	private void handCall() throws Exception {
-		// 如果当前玩家选择地主，则分别告知其他玩家，并让当前玩家出牌
 		for (int i = 0; i < 3; i++) {
 			oosVector.get(i).writeObject(-1);
 			oosVector.get(i).writeObject(lastPokerIDVector);
@@ -62,8 +68,11 @@ public class ServerThread extends Thread{
 		}
 	}
 
+	/**
+	 *  如果当前玩家放弃地主，则切换至下个玩家
+	 * @throws Exception
+	 */
 	private void handleNotCall() throws Exception {
-		// 如果当前玩家放弃地主，则切换至下个玩家
 		lord = (lord + 1) % 3;
 		turn = lord;
 		for (int j = 0; j < 3; j++) {
@@ -71,8 +80,12 @@ public class ServerThread extends Thread{
 		}
 	}
 
+	/**
+	 *  当前玩家放弃出牌
+	 * @param in
+	 * @throws Exception
+	 */
 	private void handleNotSend(ObjectInputStream in) throws Exception {
-		// 当前玩家放弃出牌
 		Integer position = (Integer) in.readObject();
 		Integer id = (Integer) in.readObject();
 		for (int i = 0; i < oosVector.size(); i++) {
@@ -86,8 +99,12 @@ public class ServerThread extends Thread{
 		oosVector.get(turn).writeObject("your turn");
 	}
 
+	/**
+	 *  处理出牌信息
+	 * @param in
+	 * @throws Exception
+	 */
 	private void handleSendPoker(ObjectInputStream in) throws Exception {
-		// 处理出牌信息
 		Integer position = (Integer) in.readObject();
 		Vector<Integer> pokerIDVector = (Vector<Integer>) in.readObject();
 		for (int i = 0; i < oosVector.size(); i++) {
@@ -99,22 +116,26 @@ public class ServerThread extends Thread{
 		oosVector.get(turn).writeObject("your turn");
 	}
 
+	/**
+	 *  玩家取得胜利，计算结果，并反馈给各个玩家
+	 * @param in
+	 * @throws Exception
+	 */
 	private void handleWin(ObjectInputStream in) throws Exception {
-		// 玩家取得胜利，计算结果，并反馈给各个玩家
 		Integer n = (Integer) in.readObject();
 		Vector<String> resultVector = new Vector<String>();
 		for (int i = 0; i < 3; i++) {
 			if (n.equals(lord)) {
 				if (i == n) {
-					resultVector.add(i, "Winner");
+					resultVector.add(i, "+3");
 				} else {
-					resultVector.add(i, "Loser");
+					resultVector.add(i, "-3");
 				}
 			} else {
 				if (i == lord) {
-					resultVector.add(i, "Loser");
+					resultVector.add(i, "-3");
 				} else {
-					resultVector.add(i, "Winner");
+					resultVector.add(i, "+3");
 				}
 			}
 		}

@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
+import frame.SelectFrame;
+
 /**
  * 多人模式结束窗口
  * @author huzhp
@@ -36,22 +38,26 @@ public class EndDialog extends JDialog{
 		}
 	}
 
-	//增加“退出游戏”按钮
-	public void addExit() {
-		this.exit = new JButton("返回选择游戏");
-		getContentPane().add(this.exit);
-		exit.setBounds(73, 180, 90, 34);
-		//exit按钮注册事件
-		exit.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent evt) {
-				
-				
-				System.exit(0);
-			}
-		});
-	}
+	//增加“返回游戏”按钮
+//	public void addExit() {
+//		this.exit = new JButton("返回");
+//		getContentPane().add(this.exit);
+//		exit.setBounds(73, 180, 90, 34);
+//		//exit按钮注册事件
+//		exit.addMouseListener(new MouseAdapter() {
+//			public void mouseClicked(MouseEvent evt) {
+//				
+//				SelectFrame reselect = new SelectFrame();
+//				reselect.init();
+//				reselect.initSelect();
+//				reselect.setVisible(true);	
+//			}
+//		});
+//	}
 
-	//向对话框增加三位玩家
+	/**
+	 * 向对话框增加三位玩家
+	 */
 	public void addPlayer() {
 		for (int i = 0; i < 3; i++) {
 			player[i] = new JLabel();
@@ -87,7 +93,10 @@ public class EndDialog extends JDialog{
 	public JLabel[] getPlayer() {
 		return player;
 	}
-
+	
+	/**
+	 * 初始化对话框界面
+	 */
 	private void initGUI() {
 		try {
 			//设置为模式对话框
@@ -111,7 +120,7 @@ public class EndDialog extends JDialog{
 			}
 			this.addPlayer();
 			this.addCount();
-			this.addExit();
+//			this.addExit();
 			pack();
 			this.setSize(290, 285);
 			//获取屏幕的Wide和High

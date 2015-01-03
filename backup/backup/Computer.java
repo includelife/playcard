@@ -1,9 +1,7 @@
-package time;
+package backup;
 
 import java.awt.Point;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -13,18 +11,13 @@ import javax.swing.JOptionPane;
 import main.Card;
 import main.CardType;
 import main.Model;
-import db.DBUpdate;
-import action.LoginAction;
 import play.Playing;
 import util.FileUtil;
 import util.PlayUtil;
+import action.LoginAction;
+import db.DBUpdate;
 
-/**
- * AI
- * @author huzhp
- *
- */
-public class Time extends Thread{
+public class Computer extends Thread{
 	public Playing palying;
 	private boolean isRun = true;
 	int i = 10;
@@ -32,7 +25,7 @@ public class Time extends Thread{
 	private Properties scorePro;
 	private File scorefile;
 
-	public Time(Playing play, int i) {
+	public void Time(Playing play, int i) {
 		this.palying = play;
 		this.i = i;
 	}

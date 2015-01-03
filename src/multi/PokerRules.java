@@ -53,8 +53,12 @@ public static Boolean canSend(Vector<Poker> lasttime, Vector<Poker> thistime) {
 	}
 }
 
+/**
+ *  该函数用于计算主牌的值，即值相同并且张数最多的牌的值之和
+ * @param hash
+ * @return
+ */
 private static Integer countValue(Hashtable<Integer, Integer> hash) {
-	// 该函数用于计算主牌的值，即值相同并且张数最多的牌的值之和
 	Enumeration<Integer> enum1 = hash.keys();
 	Vector<Integer> value = new Vector<Integer>();
 	Vector<Integer> times = new Vector<Integer>();
@@ -245,8 +249,12 @@ private static Integer getMainPokerValue(Vector<Poker> pokerVector) {
 
 }
 
+/**
+ *  判断出的牌是否为单张连牌
+ * @param iter
+ * @return
+ */
 private static Boolean isConseq(Iterator<Integer> iter) {
-	// 判断出的牌是否为单张连牌
 	Integer current = iter.next();
 	Integer next = 0;
 	while (iter.hasNext()) {
@@ -262,8 +270,12 @@ private static Boolean isConseq(Iterator<Integer> iter) {
 	return true;
 }
 
+/**
+ *  判断出的牌是否为姊妹对
+ * @param hash
+ * @return
+ */
 private static Boolean isTriConseq(Hashtable<Integer, Integer> hash) {
-	// 判断出的牌是否为姊妹对
 	Enumeration<Integer> enum1 = hash.keys();
 	TreeSet<Integer> ts = new TreeSet<Integer>();
 	Integer current;
@@ -284,7 +296,11 @@ private static Boolean isTriConseq(Hashtable<Integer, Integer> hash) {
 	}
 }
 
-//判断用户的出牌类型
+/**
+ * 判断用户的出牌类型
+ * @param pokerVector
+ * @return
+ */
 private static Integer judgePokerType(Vector<Poker> pokerVector) {
 
 	switch (pokerVector.size()) {
@@ -334,12 +350,20 @@ private static Integer judgePokerType(Vector<Poker> pokerVector) {
 
 }
 
-    //判断1张牌是否合法，并返回出牌类型（不合法就返回0）
+    /**
+     * 判断1张牌是否合法，并返回出牌类型（不合法就返回0）
+     * @param pokerVector
+     * @return
+     */
 	private static int onePoker(Vector<Poker> pokerVector) {
 		return 1;
 	}
 
-	//判断2张牌是否合法，并返回出牌类型（不合法就返回0）
+	/**
+	 * 判断2张牌是否合法，并返回出牌类型（不合法就返回0）
+	 * @param pokerVector
+	 * @return
+	 */
 	private static Integer twoPoker(Vector<Poker> pokerVector) {
 		Poker poker1 = pokerVector.get(0);
 		Poker poker2 = pokerVector.get(1);
@@ -357,7 +381,11 @@ private static Integer judgePokerType(Vector<Poker> pokerVector) {
 		}
 	}
 
-	//判断3张牌是否合法，并返回出牌类型（不合法就返回0）
+	/**
+	 * 判断3张牌是否合法，并返回出牌类型（不合法就返回0）
+	 * @param pokerVector
+	 * @return
+	 */
 	private static Integer threePoker(Vector<Poker> pokerVector) {
 		Poker poker1 = pokerVector.get(0);
 		Poker poker2 = pokerVector.get(1);
@@ -371,7 +399,11 @@ private static Integer judgePokerType(Vector<Poker> pokerVector) {
 
 	}
 	
-	//判断4张牌是否合法，并返回出牌类型（不合法就返回0）
+	/**
+	 * 判断4张牌是否合法，并返回出牌类型（不合法就返回0）
+	 * @param pokerVector
+	 * @return
+	 */
 	private static Integer fourPoker(Vector<Poker> pokerVector) {
 		TreeSet<Poker> ts = new TreeSet<Poker>();
 		for (int i = 0; i < 4; i++) {
@@ -416,7 +448,11 @@ private static Integer judgePokerType(Vector<Poker> pokerVector) {
 
 	}
 	
-	//判断5张牌是否合法，并返回出牌类型（不合法就返回0）
+	/**
+	 * 判断5张牌是否合法，并返回出牌类型（不合法就返回0）
+	 * @param pokerVector
+	 * @return
+	 */
 	private static Integer fivePoker(Vector<Poker> pokerVector) {
 		TreeSet<Integer> ts = new TreeSet<Integer>();
 		TreeSet<Integer> ts2 = new TreeSet<Integer>();
@@ -451,7 +487,11 @@ private static Integer judgePokerType(Vector<Poker> pokerVector) {
 
 	}
 
-	//九张牌的出牌类型
+	/**
+	 * 九张牌的出牌类型
+	 * @param pokerVector
+	 * @return
+	 */
    private static Integer ninePoker(Vector<Poker> pokerVector) {
 	TreeSet<Integer> ts = new TreeSet<Integer>();
 	TreeSet<Integer> ts2 = new TreeSet<Integer>();
@@ -490,7 +530,11 @@ private static Integer nineteenPoker(Vector<Poker> pokerVector) {
 
 
 
-// 计算值相同的牌的张数
+/**
+ *  计算值相同的牌的张数
+ * @param pokerVector
+ * @return
+ */
 private static Hashtable<Integer, Integer> samePokerNUM(
 		Vector<Poker> pokerVector) {
 	// 计算值相同的牌的张数
@@ -517,6 +561,11 @@ private static Hashtable<Integer, Integer> samePokerNUM(
 	return hash;
 }
 
+/**
+ * 7张牌的出牌类型
+ * @param pokerVector
+ * @return
+ */
 private static Integer sevenPoker(Vector<Poker> pokerVector) {
 	TreeSet<Integer> ts = new TreeSet<Integer>();
 	TreeSet<Integer> ts2 = new TreeSet<Integer>();
@@ -546,6 +595,11 @@ private static Integer seventeenPoker(Vector<Poker> pokerVector) {
 	return 0;
 }
 
+/**
+ * 6张牌的出牌类型
+ * @param pokerVector
+ * @return
+ */
 private static Integer sixPoker(Vector<Poker> pokerVector) {
 
 	TreeSet<Integer> ts = new TreeSet<Integer>();
@@ -592,6 +646,11 @@ private static Integer sixPoker(Vector<Poker> pokerVector) {
 	return 0;
 }
 
+/**
+ * 16张牌的出牌类型
+ * @param pokerVector
+ * @return
+ */
 private static Integer sixteenPoker(Vector<Poker> pokerVector) {
 	TreeSet<Integer> ts = new TreeSet<Integer>();
 	TreeSet<Integer> ts2 = new TreeSet<Integer>();
@@ -619,6 +678,11 @@ private static Integer sixteenPoker(Vector<Poker> pokerVector) {
 	}
 }
 
+/**
+ * 10张牌的出牌类型
+ * @param pokerVector
+ * @return
+ */
 private static Integer tenPoker(Vector<Poker> pokerVector) {
 	TreeSet<Integer> ts = new TreeSet<Integer>();
 	TreeSet<Integer> ts2 = new TreeSet<Integer>();
@@ -666,7 +730,11 @@ private static Integer thirteenPoker(Vector<Poker> pokerVector) {
 }
 
 
-
+/**
+ * 12张牌的出牌类型
+ * @param pokerVector
+ * @return
+ */
 private static Integer twelvePoker(Vector<Poker> pokerVector) {
 	TreeSet<Integer> ts = new TreeSet<Integer>();
 	TreeSet<Integer> ts2 = new TreeSet<Integer>();
@@ -708,6 +776,11 @@ private static Integer twelvePoker(Vector<Poker> pokerVector) {
 	}
 }
 
+/**
+ * 20张牌的出牌类型
+ * @param pokerVector
+ * @return
+ */
 private static Integer twentyPoker(Vector<Poker> pokerVector) {
 	TreeSet<Integer> ts = new TreeSet<Integer>();
 	TreeSet<Integer> ts2 = new TreeSet<Integer>();

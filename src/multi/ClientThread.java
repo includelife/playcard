@@ -8,6 +8,9 @@ import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
+import play.Playing;
+import frame.SelectFrame;
+
 /**
  * 客户端线程
  * @author huzhp
@@ -22,8 +25,13 @@ public class ClientThread extends Thread{
 	private PreparePanel prepare;//游戏开始前的面板
 	private Boolean stop = false;
 
+	/**
+	 *  该类为游戏线程类
+	 * @param socket
+	 * @param gamepanel
+	 * @param prepare
+	 */
 	public ClientThread(Socket socket, GamePanel gamepanel, PreparePanel prepare) {
-		// 该类为游戏线程类，主要
 		this.gamepanel = gamepanel;
 		this.prepare = prepare;
 		for (int i = 0; i < 3; i++) {
@@ -45,7 +53,11 @@ public class ClientThread extends Thread{
 
 	}
 
-	// 下面的方法用于计算其他出牌玩家在当前玩家面板上的位置
+	/**
+	 * 下面的方法用于计算其他出牌玩家在当前玩家面板上的位置
+	 * @param n
+	 * @return
+	 */
 	private int countPosition(int n) {
 		if (position == 0) {
 			if (n == 2) {
@@ -68,8 +80,11 @@ public class ClientThread extends Thread{
 		}
 	}
 
+	/**
+	 *  处理地主选择
+	 * @throws Exception
+	 */
 	private void handleLord() throws Exception {
-		// 处理地主选择
 		Integer lord = (Integer) ois.readObject();
 
 		while (lord != -1) {
@@ -83,8 +98,11 @@ public class ClientThread extends Thread{
 
 	}
 
+	/**
+	 *  如果当前玩家不是地主
+	 * @throws Exception
+	 */
 	private void handleLordIS() throws Exception {
-		// 如果当前玩家不是地主
 		Integer lord = (Integer) ois.readObject();
 		if (this.countPosition(lord) == 1) {
 
@@ -103,8 +121,11 @@ public class ClientThread extends Thread{
 		}
 	}
 
+	/**
+	 *  处理新建游戏时的数据传输
+	 * @throws Exception
+	 */
 	private void handleNewGame() throws Exception {
-		// 处理新建游戏时的数据传输
 		Vector<Integer> poker1IDVector = (Vector<Integer>) ois.readObject();
 		Vector<Integer> poker2IDVector = (Vector<Integer>) ois.readObject();
 		Vector<Integer> poker3IDVector = (Vector<Integer>) ois.readObject();
@@ -131,8 +152,10 @@ public class ClientThread extends Thread{
 		handleLord();
 	}
 
+	/**
+	 * 其他玩家选择不出
+	 */
 	private void handleNotSend() throws Exception {
-		// 其他玩家选择不出
 		Integer n = (Integer) ois.readObject();
 		Integer id = (Integer) ois.readObject();
 		Vector<Poker> pokerVector = new Vector<Poker>();
@@ -150,6 +173,10 @@ public class ClientThread extends Thread{
 		}
 	}
 
+	/**
+	 * 处理玩家名字
+	 * @throws Exception
+	 */
 	private void handlePlayerName() throws Exception {
 		if (position == 0 || position == 2) {
 			playernames[0] = prepare.getPlayernames()[0];
@@ -170,8 +197,12 @@ public class ClientThread extends Thread{
 		}
 	}
 
+	/**
+	 *  处理其他玩家出牌，当前玩家面板上的响应
+	 * @param n
+	 * @throws Exception
+	 */
 	private void handleSendPoker(int n) throws Exception {
-		// 处理其他玩家出牌，当前玩家面板上的响应
 		Vector<Integer> pokerIDVector = (Vector<Integer>) ois.readObject();
 		Vector<Poker> pokerVector = new Vector<Poker>();
 		for (int i = 0; i < pokerIDVector.size(); i++) {
@@ -190,8 +221,11 @@ public class ClientThread extends Thread{
 		}
 	}
 
+	/**
+	 *  玩家取得胜利
+	 * @throws Exception
+	 */
 	private void handleWin() throws Exception {
-		// 玩家取得胜利
 		gamepanel.showsSendButton(false);
 		String[] name = (String[]) ois.readObject();
 		Vector<String> resultVector = (Vector<String>) ois.readObject();
@@ -201,11 +235,26 @@ public class ClientThread extends Thread{
 			endframe.getCount()[i].setText(resultVector.get(i));
 		}
 		endframe.setVisible(true);
+		Runnable thread = new Runnable() {				
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				SelectFrame reselect = new SelectFrame();
+				reselect.init();
+				reselect.initSelect();
+				reselect.setVisible(true);	
+			}
+		};			
+		Thread t = new Thread(thread);
+		t.start();
+		this.stop();
 		stop = true;
 	}
 
+	/**
+	 *  如果当前玩家是地主，则刷新界面
+	 */
 	private void handleYouAreLord() {
-		// 如果当前玩家是地主，则刷新界面
 		gamepanel.getMypokerIDVector().addAll(gamepanel.getLastpokerIDVector());
 		Collections.sort(gamepanel.getMypokerIDVector());
 		gamepanel.showsSendButton(true);
@@ -213,8 +262,10 @@ public class ClientThread extends Thread{
 		gamepanel.display();
 	}
 
+	/**
+	 *  轮到当前玩家出牌
+	 */
 	private void handleYourTurn() {
-		// 轮到当前玩家出牌
 		gamepanel.setIsMyTurn(true);
 	}
 

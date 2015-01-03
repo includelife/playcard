@@ -20,8 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 
-import Main.Card;
-import Main.CardType;
+import main.Card;
+import main.CardType;
 
 /**
  * 多人模式游戏主界面Panel
@@ -149,6 +149,11 @@ public class GamePanel extends JPanel{
 	private JButton sendButton;// 出牌按钮
 	private Timer timer;// 计时器，用于控制发牌时的动画
 
+	/**
+	 * GamePanel构造方法
+	 * @param width
+	 * @param height
+	 */
 	public GamePanel(int width, int height) {
 		super();
 		//设置画布的长和宽
@@ -160,7 +165,10 @@ public class GamePanel extends JPanel{
 		this.playernames[2] = "";
 		initGUI();
 	}
-
+	
+	/**
+	 * 选择地主按钮
+	 */
 	public void addChoiceLord() {
 		final String[] text = { "叫地主", "不叫" };
 
@@ -180,6 +188,9 @@ public class GamePanel extends JPanel{
 		this.addChoiceLordEvent();
 	}
 
+	/**
+	 * 地主选择按钮事件
+	 */
 	public void addChoiceLordEvent() {
 		lordChooseButton[0].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
@@ -205,7 +216,9 @@ public class GamePanel extends JPanel{
 		});
 	}
 
-	//增加底牌的标签
+	/**
+	 * 增加底牌的标签
+	 */
 	public void addLastPokerLabel() {
 		for (int i = 0; i < 3; i++) {
 			JLabel label1 = new JLabel();
@@ -219,6 +232,9 @@ public class GamePanel extends JPanel{
 		}
 	}
 
+	/**
+	 * 增加地主标签
+	 */
 	public void addLordlabel() {
 		this.lordLabels[0] = new JLabel(imageIcons[55]);
 		this.add(this.lordLabels[0]);
@@ -242,7 +258,9 @@ public class GamePanel extends JPanel{
 		this.lordLabels[2].setVisible(false);
 	}
 
-	//添加当前玩家的扑克标签
+	/**
+	 * 添加当前玩家的扑克标签
+	 */
 	public void addMyPokerLabel() {
 		for (int i = 19; i >= 0; i--) {
 			PokerLabel p = new PokerLabel();
@@ -256,7 +274,10 @@ public class GamePanel extends JPanel{
 			this.add(p);
 		}
 	}
-
+	
+	/**
+	 * 出牌按钮
+	 */
 	public void addMySendedPokerLabel() {
 		for (int i = 19; i >= 0; i--) {
 			JLabel p = new JLabel();
@@ -270,8 +291,10 @@ public class GamePanel extends JPanel{
 		}
 	}
 
+	/**
+	 *  放弃出牌操作，以及信息提示
+	 */
 	public void addNotSendButton() {
-		// 放弃出牌操作，以及信息提示
 		this.notSendButton = new JButton();
 		notSendButton.setText("不出");
 		notSendButton.setVisible(false);
@@ -311,6 +334,9 @@ public class GamePanel extends JPanel{
 		});
 	}
 
+	/**
+	 * 其他人出牌按钮
+	 */
 	public void addOtherSendedPokerLabel() {
 		for (int i = 23; i >= 0; i--) {
 			JLabel p = new JLabel();
@@ -323,7 +349,9 @@ public class GamePanel extends JPanel{
 		}
 	}
 
-	//增加另外两个玩家的扑克的标签
+	/**
+	 * 增加另外两个玩家的扑克的标签
+	 */
 	public void addOthersPokerLabel() {
 		for (int i = 19; i >= 0; i--) {
 			JLabel label1 = new JLabel();
@@ -346,7 +374,9 @@ public class GamePanel extends JPanel{
 		}
 	}
 
-	//增加“出牌”按钮
+	/**
+	 * 增加“出牌”按钮
+	 */
 	public void addSendButton() {
 		// 出牌操作，以及信息提示
 		sendButton = new JButton();
@@ -435,8 +465,10 @@ public class GamePanel extends JPanel{
 		});
 	}
 
+	/**
+	 * 每次出牌之后的界面刷新
+	 */
 	public void display() {
-		// 每次出牌之后的界面刷新
 		for (int i = 19; i >= 0; i--) {
 			if (i <= mypokerIDVector.size() - 1) {
 				int id = mypokerIDVector.get(i);
@@ -495,22 +527,28 @@ public class GamePanel extends JPanel{
 		return player2pokerIDVector;
 	}
 
+	/**
+	 *  隐藏当前玩家出的牌
+	 */
 	public void hideMysendPoker() {
-		// 隐藏当前玩家出的牌
 		for (int i = 0; i < 20; i++) {
 			this.mySendPokerLabelVector.get(i).setVisible(false);
 		}
 	}
 
+	/**
+	 * 隐藏下一玩家上次出的牌
+	 */
 	public void hideNextSendPoker() {
-		// 隐藏下一玩家上次出的牌
 		for (int i = 0; i < 12; i++) {
 			this.otherSendPokerLabelVector.get(i).setVisible(false);
 		}
 	}
 
+	/**
+	 *  隐藏其他组件
+	 */
 	public void hideOtherLabel() {
-		// 隐藏其他组件
 		for (int i = 0; i < 3; i++) {
 			this.lordLabels[i].setVisible(false);
 
@@ -520,8 +558,10 @@ public class GamePanel extends JPanel{
 		}
 	}
 
+	/**
+	 *  隐藏所有玩家牌的的标签
+	 */
 	public void hidePokerLabel() {
-		// 隐藏所有玩家牌的的标签
 		for (int i = 0; i < 20; i++) {
 			this.myPokerLabelVector.get(i).setVisible(false);
 			this.player1PokerLabelVector.get(i).setVisible(false);
@@ -544,8 +584,10 @@ public class GamePanel extends JPanel{
 		}
 	}
 
+	/**
+	 *  初始化，并添加各个功能模块
+	 */
 	private void initGUI() {
-		// 初始化，并添加各个功能模块
 		try {
 			GroupLayout thisLayout = new GroupLayout(this);
 			this.setLayout(thisLayout);
@@ -626,8 +668,10 @@ public class GamePanel extends JPanel{
 		this.position = position;
 	}
 
+	/**
+	 *  显示底牌
+	 */
 	public void showLastPoker() {
-		// 显示底牌
 		for (int i = 0; i < 3; i++) {
 			lastPokerLabelVector.get(i).setVisible(true);
 			lastPokerLabelVector.get(i).setIcon(
@@ -635,14 +679,20 @@ public class GamePanel extends JPanel{
 		}
 	}
 
+	/**
+	 *  显示选择地主按钮
+	 * @param show
+	 */
 	public void showLordChoose(Boolean show) {
-		// 显示选择地主按钮
 		this.lordChooseButton[0].setVisible(show);
 		this.lordChooseButton[1].setVisible(show);
 	}
 
+	/**
+	 *  显示当前玩家出的牌
+	 * @param pokerIDVector
+	 */
 	public void showMysendPoker(Vector<Integer> pokerIDVector) {
-		// 显示当前玩家出的牌
 		this.hideNextSendPoker();
 		int size = 10 - pokerIDVector.size() / 2;
 		for (int i = size, j = 0; j < pokerIDVector.size(); i++, j++) {
@@ -653,8 +703,11 @@ public class GamePanel extends JPanel{
 
 	}
 
+	/**
+	 *  显示下一玩家出的牌
+	 * @param poker
+	 */
 	public void showNextSendPoker(Vector<Poker> poker) {
-		// 显示下一玩家出的牌
 		this.hidePreSendPoker();
 		for (int i = 0; i < poker.size(); i++) {
 			this.otherSendPokerLabelVector.get(i).setIcon(
@@ -663,8 +716,12 @@ public class GamePanel extends JPanel{
 		}
 	}
 
+	/**
+	 *  显示其他玩家出的牌
+	 * @param poker
+	 * @param sender
+	 */
 	public void showOtherSendPoker(Vector<Poker> poker, int sender) {
-		// 显示其他玩家出的牌
 		if (sender == 1) {
 			this.showPreSendPoker(poker);
 		} else {
@@ -673,8 +730,11 @@ public class GamePanel extends JPanel{
 
 	}
 
+	/**
+	 *  显示上一玩家出的牌
+	 * @param poker
+	 */
 	public void showPreSendPoker(Vector<Poker> poker) {
-		// 显示上一玩家出的牌
 		this.hideMysendPoker();
 		for (int i = 0; i < poker.size(); i++) {
 			this.otherSendPokerLabelVector.get(23 - i).setIcon(
@@ -685,14 +745,19 @@ public class GamePanel extends JPanel{
 
 	}
 
+	/**
+	 *  显示出牌及不出按钮
+	 * @param show
+	 */
 	public void showsSendButton(Boolean show) {
-		// 显示出牌及不出按钮
 		sendButton.setVisible(show);
 		notSendButton.setVisible(show);
 	}
 
+	/**
+	 *  完成发牌的动画过程
+	 */
 	public void start() {
-		// 完成发牌的动画过程
 
 		timer = new Timer(245, new ActionListener() {
 			int count = 0;

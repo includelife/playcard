@@ -15,8 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import main.UserBean;
 import play.Playing;
-import Main.UserBean;
 import action.LoginAction;
 
 /**

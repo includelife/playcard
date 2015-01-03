@@ -23,23 +23,33 @@ public class AddDialog extends JDialog{
 	private JLabel jLabel2;
 	private JTextField port;
 
-	//构造方法
+	/**
+	 * 构造方法
+	 */
 	public AddDialog() {
 		//初始化界面
 		initGUI();
 	}
 
-	//返回玩家输入的服务端IP地址
+	/**
+	 * 返回玩家输入的服务端IP地址
+	 * @return
+	 */
 	public JTextField getIpAdress() {
 		return ipAddress;
 	}
 
-	//返回玩家输入的服务端开启的端口号
+	/**
+	 * 返回玩家输入的服务端开启的端口号
+	 * @return
+	 */
 	public JTextField getPort() {
 		return port;
 	}
 
-	//初始化对话框
+	/**
+	 * 初始化对话框
+	 */
 	private void initGUI() {
 		try {
 

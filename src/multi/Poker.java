@@ -17,7 +17,10 @@ public class Poker implements Comparable<Poker>, Serializable {
 	 */
 	private Integer value;
 
-	// 根据id生成一张扑克
+	/**
+	 *  根据id生成一张扑克
+	 * @param id
+	 */
 	public Poker(Integer id) {
 		this.id = id;
 		if (id == 0) {
@@ -35,7 +38,9 @@ public class Poker implements Comparable<Poker>, Serializable {
 		return this.value.compareTo(o.value);
 	}
 
-	//判断两张牌是否一样大，一样大，就返回true，否则就返回false
+	/**
+	 * 判断两张牌是否一样大，一样大，就返回true，否则就返回false
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		Poker poker = (Poker) obj;

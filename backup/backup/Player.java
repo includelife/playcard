@@ -1,14 +1,12 @@
-package play;
+package backup;
 
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -22,39 +20,18 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.xml.stream.events.StartDocument;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 import main.Card;
 import main.CardType;
-import db.DBQuery;
-import action.LoginAction;
-import frame.SelectFrame;
+import play.Playing;
 import time.Time;
-import util.FileUtil;
 import util.PlayUtil;
+import action.LoginAction;
+import db.DBQuery;
+import frame.SelectFrame;
 
-/**
- * 游戏界面
- * @author huzhp
- *
- */
-public class Playing extends JFrame implements ActionListener{
+public class Player extends JFrame implements ActionListener{
 	
     //定义容器	
 	public Container container = null;
@@ -88,7 +65,7 @@ public class Playing extends JFrame implements ActionListener{
 
 	private File scorefile = null; 
 	
-	public Playing() {
+	public void Playing() {
 		// TODO Auto-generated constructor stub
 		InitGame();
 	}
@@ -500,7 +477,7 @@ public class Playing extends JFrame implements ActionListener{
 	 * @param scores the scores to set
 	 */
 	public static void setScores(String scores) {
-		Playing.scores = scores;
+		Playing.setScores(scores);
 	}
 
 	/**
@@ -730,6 +707,10 @@ class NewTimer implements Runnable{
 			this.i = i;
 		}
 		
+		public NewTimer(Player player, int i2) {
+			// TODO Auto-generated constructor stub
+		}
+
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
@@ -737,4 +718,3 @@ class NewTimer implements Runnable{
 			playing.getTime().start();
 		}
 }	
-
