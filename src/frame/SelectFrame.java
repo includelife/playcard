@@ -200,4 +200,152 @@ public class SelectFrame extends JFrame implements ActionListener{
 			fr.setVisible(true);
 		}
 	}
+
+	/**
+	 * @return the pane
+	 */
+	public Container getPane() {
+		return pane;
+	}
+
+	/**
+	 * @param pane the pane to set
+	 */
+	public void setPane(Container pane) {
+		this.pane = pane;
+	}
+
+	/**
+	 * @return the single
+	 */
+	public JButton getSingle() {
+		return single;
+	}
+
+	/**
+	 * @param single the single to set
+	 */
+	public void setSingle(JButton single) {
+		this.single = single;
+	}
+
+	/**
+	 * @return the multi
+	 */
+	public JButton getMulti() {
+		return multi;
+	}
+
+	/**
+	 * @param multi the multi to set
+	 */
+	public void setMulti(JButton multi) {
+		this.multi = multi;
+	}
+
+	/**
+	 * @return the help
+	 */
+	public JButton getHelp() {
+		return help;
+	}
+
+	/**
+	 * @param help the help to set
+	 */
+	public void setHelp(JButton help) {
+		this.help = help;
+	}
+
+	/**
+	 * @return the search
+	 */
+	public JButton getSearch() {
+		return search;
+	}
+
+	/**
+	 * @param search the search to set
+	 */
+	public void setSearch(JButton search) {
+		this.search = search;
+	}
+
+	/**
+	 * @return the rebutton
+	 */
+	public JButton getRebutton() {
+		return rebutton;
+	}
+
+	/**
+	 * @param rebutton the rebutton to set
+	 */
+	public void setRebutton(JButton rebutton) {
+		this.rebutton = rebutton;
+	}
+
+	/**
+	 * @return the users
+	 */
+	public String getUsers() {
+		return users;
+	}
+
+	/**
+	 * @param users the users to set
+	 */
+	public void setUsers(String users) {
+		this.users = users;
+	}
+
+	/**
+	 * @return the scorePro
+	 */
+	public Properties getScorePro() {
+		return scorePro;
+	}
+
+	/**
+	 * @param scorePro the scorePro to set
+	 */
+	public void setScorePro(Properties scorePro) {
+		this.scorePro = scorePro;
+	}
+
+	/**
+	 * @return the scorefile
+	 */
+	public File getScorefile() {
+		return scorefile;
+	}
+
+	/**
+	 * @param scorefile the scorefile to set
+	 */
+	public void setScorefile(File scorefile) {
+		this.scorefile = scorefile;
+	}
+
+	/**
+	 * @return the scores
+	 */
+	public String getScores() {
+		return scores;
+	}
+
+	/**
+	 * @param scores the scores to set
+	 */
+	public void setScores(String scores) {
+		this.scores = scores;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 }

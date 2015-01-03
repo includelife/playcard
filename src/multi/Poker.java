@@ -3,7 +3,11 @@
 import java.io.Serializable;
 
 
-
+/**
+ * ÆË¿ËÅÆÀà
+ * @author huzhp
+ *
+ */
 public class Poker implements Comparable<Poker>, Serializable {
 	private Integer id;
 	/*
@@ -57,4 +61,19 @@ public class Poker implements Comparable<Poker>, Serializable {
 	public Integer getValue() {
 		return value;
 	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * @param value the value to set
+	 */
+	public void setValue(Integer value) {
+		this.value = value;
+	}
+	
 }

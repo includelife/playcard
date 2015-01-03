@@ -621,6 +621,7 @@ public class PlayUtil {
 			}
 			return list3;
 		}
+		
 }
 class Card_index{
 		List a[]=new ArrayList[4];//µ•’≈

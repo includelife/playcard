@@ -86,4 +86,47 @@ public class DBDelete {
 			}
 		}
 	}
+
+	/**
+	 * @return the conn
+	 */
+	public static Connection getConn() {
+		return conn;
+	}
+
+	/**
+	 * @param conn the conn to set
+	 */
+	public static void setConn(Connection conn) {
+		DBDelete.conn = conn;
+	}
+
+	/**
+	 * @return the username
+	 */
+	public static String getUsername() {
+		return USERNAME;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public static String getPassword() {
+		return PASSWORD;
+	}
+
+	/**
+	 * @return the driver
+	 */
+	public static String getDriver() {
+		return DRIVER;
+	}
+
+	/**
+	 * @return the url
+	 */
+	public static String getUrl() {
+		return URL;
+	}
+	
 }

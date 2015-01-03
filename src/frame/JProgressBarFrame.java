@@ -64,4 +64,33 @@ public class JProgressBarFrame extends JDialog {
 		initFrame();
 	}
 
+	/**
+	 * @return the progressBarLabel
+	 */
+	public JLabel getProgressBarLabel() {
+		return progressBarLabel;
+	}
+
+	/**
+	 * @param progressBarLabel the progressBarLabel to set
+	 */
+	public void setProgressBarLabel(JLabel progressBarLabel) {
+		this.progressBarLabel = progressBarLabel;
+	}
+
+	/**
+	 * @return the progressBar
+	 */
+	public JProgressBar getProgressBar() {
+		return progressBar;
+	}
+
+	/**
+	 * @param progressBar the progressBar to set
+	 */
+	public void setProgressBar(JProgressBar progressBar) {
+		this.progressBar = progressBar;
+	}
+	
+
 }

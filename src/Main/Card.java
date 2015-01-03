@@ -176,5 +176,19 @@ public class Card extends JLabel implements MouseListener{
 	public void setClicked(boolean clicked) {
 		this.clicked = clicked;
 	}
+
+	/**
+	 * @return the gamepanel
+	 */
+	public GamePanel getGamepanel() {
+		return gamepanel;
+	}
+
+	/**
+	 * @param gamepanel the gamepanel to set
+	 */
+	public void setGamepanel(GamePanel gamepanel) {
+		this.gamepanel = gamepanel;
+	}
 	
 }

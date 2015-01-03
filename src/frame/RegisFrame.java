@@ -270,4 +270,75 @@ public class RegisFrame extends JFrame {
 		 */
 	}
 
+	/**
+	 * @return the contentPane
+	 */
+	public JPanel getContentPane() {
+		return contentPane;
+	}
+
+	/**
+	 * @param contentPane the contentPane to set
+	 */
+	public void setContentPane(JPanel contentPane) {
+		this.contentPane = contentPane;
+	}
+
+	/**
+	 * @return the textField
+	 */
+	public JTextField getTextField() {
+		return textField;
+	}
+
+	/**
+	 * @param textField the textField to set
+	 */
+	public void setTextField(JTextField textField) {
+		this.textField = textField;
+	}
+
+	/**
+	 * @return the passwordField
+	 */
+	public JPasswordField getPasswordField() {
+		return passwordField;
+	}
+
+	/**
+	 * @param passwordField the passwordField to set
+	 */
+	public void setPasswordField(JPasswordField passwordField) {
+		this.passwordField = passwordField;
+	}
+
+	/**
+	 * @return the passwordField_1
+	 */
+	public JPasswordField getPasswordField_1() {
+		return passwordField_1;
+	}
+
+	/**
+	 * @param passwordField_1 the passwordField_1 to set
+	 */
+	public void setPasswordField_1(JPasswordField passwordField_1) {
+		this.passwordField_1 = passwordField_1;
+	}
+
+	/**
+	 * @return the newLabel
+	 */
+	public JLabel getNewLabel() {
+		return newLabel;
+	}
+
+	/**
+	 * @param newLabel the newLabel to set
+	 */
+	public void setNewLabel(JLabel newLabel) {
+		this.newLabel = newLabel;
+	}
+	
+
 }

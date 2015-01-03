@@ -6,6 +6,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
 
+/**
+ * 服务器端线程
+ * @author huzhp
+ *
+ */
 public class ServerThread extends Thread{
 	//上一位玩家所出牌的ID
 	Vector<Integer> lastPokerIDVector = new Vector<Integer>();
@@ -226,4 +231,159 @@ public class ServerThread extends Thread{
 		oos.writeObject(pokerIDVector);
 
 	}
+
+	/**
+	 * @return the lastPokerIDVector
+	 */
+	public Vector<Integer> getLastPokerIDVector() {
+		return lastPokerIDVector;
+	}
+
+	/**
+	 * @param lastPokerIDVector the lastPokerIDVector to set
+	 */
+	public void setLastPokerIDVector(Vector<Integer> lastPokerIDVector) {
+		this.lastPokerIDVector = lastPokerIDVector;
+	}
+
+	/**
+	 * @return the lord
+	 */
+	public Integer getLord() {
+		return lord;
+	}
+
+	/**
+	 * @param lord the lord to set
+	 */
+	public void setLord(Integer lord) {
+		this.lord = lord;
+	}
+
+	/**
+	 * @return the oisVector
+	 */
+	public Vector<ObjectInputStream> getOisVector() {
+		return oisVector;
+	}
+
+	/**
+	 * @param oisVector the oisVector to set
+	 */
+	public void setOisVector(Vector<ObjectInputStream> oisVector) {
+		this.oisVector = oisVector;
+	}
+
+	/**
+	 * @return the oosVector
+	 */
+	public Vector<ObjectOutputStream> getOosVector() {
+		return oosVector;
+	}
+
+	/**
+	 * @param oosVector the oosVector to set
+	 */
+	public void setOosVector(Vector<ObjectOutputStream> oosVector) {
+		this.oosVector = oosVector;
+	}
+
+	/**
+	 * @return the player1PokerIDVector
+	 */
+	public Vector<Integer> getPlayer1PokerIDVector() {
+		return player1PokerIDVector;
+	}
+
+	/**
+	 * @param player1PokerIDVector the player1PokerIDVector to set
+	 */
+	public void setPlayer1PokerIDVector(Vector<Integer> player1PokerIDVector) {
+		this.player1PokerIDVector = player1PokerIDVector;
+	}
+
+	/**
+	 * @return the player2PokerIDVector
+	 */
+	public Vector<Integer> getPlayer2PokerIDVector() {
+		return player2PokerIDVector;
+	}
+
+	/**
+	 * @param player2PokerIDVector the player2PokerIDVector to set
+	 */
+	public void setPlayer2PokerIDVector(Vector<Integer> player2PokerIDVector) {
+		this.player2PokerIDVector = player2PokerIDVector;
+	}
+
+	/**
+	 * @return the player3PokerIDVector
+	 */
+	public Vector<Integer> getPlayer3PokerIDVector() {
+		return player3PokerIDVector;
+	}
+
+	/**
+	 * @param player3PokerIDVector the player3PokerIDVector to set
+	 */
+	public void setPlayer3PokerIDVector(Vector<Integer> player3PokerIDVector) {
+		this.player3PokerIDVector = player3PokerIDVector;
+	}
+
+	/**
+	 * @return the playername
+	 */
+	public String[] getPlayername() {
+		return playername;
+	}
+
+	/**
+	 * @param playername the playername to set
+	 */
+	public void setPlayername(String[] playername) {
+		this.playername = playername;
+	}
+
+	/**
+	 * @return the server
+	 */
+	public ServerSocket getServer() {
+		return server;
+	}
+
+	/**
+	 * @param server the server to set
+	 */
+	public void setServer(ServerSocket server) {
+		this.server = server;
+	}
+
+	/**
+	 * @return the stop
+	 */
+	public boolean isStop() {
+		return stop;
+	}
+
+	/**
+	 * @param stop the stop to set
+	 */
+	public void setStop(boolean stop) {
+		this.stop = stop;
+	}
+
+	/**
+	 * @return the turn
+	 */
+	public Integer getTurn() {
+		return turn;
+	}
+
+	/**
+	 * @param turn the turn to set
+	 */
+	public void setTurn(Integer turn) {
+		this.turn = turn;
+	}
+	
 }

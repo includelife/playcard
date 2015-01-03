@@ -688,4 +688,75 @@ public class Time extends Thread{
 	public void setRun(boolean isRun) {
 		this.isRun = isRun;
 	}
+
+	/**
+	 * @return the palying
+	 */
+	public Playing getPalying() {
+		return palying;
+	}
+
+	/**
+	 * @param palying the palying to set
+	 */
+	public void setPalying(Playing palying) {
+		this.palying = palying;
+	}
+
+	/**
+	 * @return the i
+	 */
+	public int getI() {
+		return i;
+	}
+
+	/**
+	 * @param i the i to set
+	 */
+	public void setI(int i) {
+		this.i = i;
+	}
+
+	/**
+	 * @return the users
+	 */
+	public String getUsers() {
+		return users;
+	}
+
+	/**
+	 * @param users the users to set
+	 */
+	public void setUsers(String users) {
+		this.users = users;
+	}
+
+	/**
+	 * @return the scorePro
+	 */
+	public Properties getScorePro() {
+		return scorePro;
+	}
+
+	/**
+	 * @param scorePro the scorePro to set
+	 */
+	public void setScorePro(Properties scorePro) {
+		this.scorePro = scorePro;
+	}
+
+	/**
+	 * @return the scorefile
+	 */
+	public File getScorefile() {
+		return scorefile;
+	}
+
+	/**
+	 * @param scorefile the scorefile to set
+	 */
+	public void setScorefile(File scorefile) {
+		this.scorefile = scorefile;
+	}
+	
 }

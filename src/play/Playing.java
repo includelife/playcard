@@ -501,6 +501,217 @@ public class Playing extends JFrame implements ActionListener{
 	public static void setScores(String scores) {
 		Playing.scores = scores;
 	}
+
+	/**
+	 * @return the container
+	 */
+	public Container getContainer() {
+		return container;
+	}
+
+	/**
+	 * @param container the container to set
+	 */
+	public void setContainer(Container container) {
+		this.container = container;
+	}
+
+	/**
+	 * @return the start
+	 */
+	public JMenuItem getStart() {
+		return start;
+	}
+
+	/**
+	 * @param start the start to set
+	 */
+	public void setStart(JMenuItem start) {
+		this.start = start;
+	}
+
+	/**
+	 * @return the exit
+	 */
+	public JMenuItem getExit() {
+		return exit;
+	}
+
+	/**
+	 * @param exit the exit to set
+	 */
+	public void setExit(JMenuItem exit) {
+		this.exit = exit;
+	}
+
+	/**
+	 * @return the about
+	 */
+	public JMenuItem getAbout() {
+		return about;
+	}
+
+	/**
+	 * @param about the about to set
+	 */
+	public void setAbout(JMenuItem about) {
+		this.about = about;
+	}
+
+	/**
+	 * @return the publishCard
+	 */
+	public JButton[] getPublishCard() {
+		return publishCard;
+	}
+
+	/**
+	 * @param publishCard the publishCard to set
+	 */
+	public void setPublishCard(JButton[] publishCard) {
+		this.publishCard = publishCard;
+	}
+
+	/**
+	 * @return the lordFlag
+	 */
+	public int getLordFlag() {
+		return lordFlag;
+	}
+
+	/**
+	 * @param lordFlag the lordFlag to set
+	 */
+	public void setLordFlag(int lordFlag) {
+		this.lordFlag = lordFlag;
+	}
+
+	/**
+	 * @return the turn
+	 */
+	public int getTurn() {
+		return turn;
+	}
+
+	/**
+	 * @param turn the turn to set
+	 */
+	public void setTurn(int turn) {
+		this.turn = turn;
+	}
+
+	/**
+	 * @return the currentList
+	 */
+	public List<Card>[] getCurrentList() {
+		return currentList;
+	}
+
+	/**
+	 * @param currentList the currentList to set
+	 */
+	public void setCurrentList(List<Card>[] currentList) {
+		this.currentList = currentList;
+	}
+
+	/**
+	 * @return the card
+	 */
+	public Card[] getCard() {
+		return card;
+	}
+
+	/**
+	 * @param card the card to set
+	 */
+	public void setCard(Card[] card) {
+		this.card = card;
+	}
+
+	/**
+	 * @return the t
+	 */
+	public Time getT() {
+		return t;
+	}
+
+	/**
+	 * @param t the t to set
+	 */
+	public void setT(Time t) {
+		this.t = t;
+	}
+
+	/**
+	 * @return the nextPlayer
+	 */
+	public boolean isNextPlayer() {
+		return nextPlayer;
+	}
+
+	/**
+	 * @param nextPlayer the nextPlayer to set
+	 */
+	public void setNextPlayer(boolean nextPlayer) {
+		this.nextPlayer = nextPlayer;
+	}
+
+	/**
+	 * @return the users
+	 */
+	public String getUsers() {
+		return users;
+	}
+
+	/**
+	 * @param users the users to set
+	 */
+	public void setUsers(String users) {
+		this.users = users;
+	}
+
+	/**
+	 * @return the scorePro
+	 */
+	public Properties getScorePro() {
+		return scorePro;
+	}
+
+	/**
+	 * @param scorePro the scorePro to set
+	 */
+	public void setScorePro(Properties scorePro) {
+		this.scorePro = scorePro;
+	}
+
+	/**
+	 * @return the scorefile
+	 */
+	public File getScorefile() {
+		return scorefile;
+	}
+
+	/**
+	 * @param scorefile the scorefile to set
+	 */
+	public void setScorefile(File scorefile) {
+		this.scorefile = scorefile;
+	}
+
+	/**
+	 * @param lord the lord to set
+	 */
+	public void setLord(JLabel lord) {
+		this.lord = lord;
+	}
+
+	/**
+	 * @param time the time to set
+	 */
+	public void setTime(JLabel[] time) {
+		this.time = time;
+	}
+	
 }
 
 /**

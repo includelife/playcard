@@ -23,9 +23,20 @@ import javax.swing.text.StyledEditorKit.ForegroundAction;
 import Main.Card;
 import Main.CardType;
 
+/**
+ * 多人模式游戏主界面Panel
+ * @author huzhp
+ *
+ */
 public class GamePanel extends JPanel{
-	
+	/**
+	 * 生成57个图标
+	 */
 	private static ImageIcon imageIcons[] = new ImageIcon[57];
+	
+	/**
+	 * 将图标与图片资源一一对应起来
+	 */
 	static {
 		imageIcons[1] = new ImageIcon("images/" + 1 +"-"+3+".gif");	
 		imageIcons[2] = new ImageIcon("images/" + 2 +"-"+3+".gif");	
@@ -710,4 +721,237 @@ public class GamePanel extends JPanel{
 		});
 		timer.start();
 	}
+
+	/**
+	 * @return the imageIcons
+	 */
+	public static ImageIcon[] getImageIcons() {
+		return imageIcons;
+	}
+
+	/**
+	 * @param imageIcons the imageIcons to set
+	 */
+	public static void setImageIcons(ImageIcon[] imageIcons) {
+		GamePanel.imageIcons = imageIcons;
+	}
+
+	/**
+	 * @return the distant
+	 */
+	public int getDistant() {
+		return distant;
+	}
+
+	/**
+	 * @param distant the distant to set
+	 */
+	public void setDistant(int distant) {
+		this.distant = distant;
+	}
+
+	/**
+	 * @return the height
+	 */
+	public int getHeight() {
+		return height;
+	}
+
+	/**
+	 * @param height the height to set
+	 */
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	/**
+	 * @return the width
+	 */
+	public int getWidth() {
+		return width;
+	}
+
+	/**
+	 * @param width the width to set
+	 */
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	/**
+	 * @return the lastPokerLabelVector
+	 */
+	public Vector<JLabel> getLastPokerLabelVector() {
+		return lastPokerLabelVector;
+	}
+
+	/**
+	 * @param lastPokerLabelVector the lastPokerLabelVector to set
+	 */
+	public void setLastPokerLabelVector(Vector<JLabel> lastPokerLabelVector) {
+		this.lastPokerLabelVector = lastPokerLabelVector;
+	}
+
+	/**
+	 * @return the lordChooseButton
+	 */
+	public JButton[] getLordChooseButton() {
+		return lordChooseButton;
+	}
+
+	/**
+	 * @param lordChooseButton the lordChooseButton to set
+	 */
+	public void setLordChooseButton(JButton[] lordChooseButton) {
+		this.lordChooseButton = lordChooseButton;
+	}
+
+	/**
+	 * @return the myPokerLabelVector
+	 */
+	public Vector<PokerLabel> getMyPokerLabelVector() {
+		return myPokerLabelVector;
+	}
+
+	/**
+	 * @param myPokerLabelVector the myPokerLabelVector to set
+	 */
+	public void setMyPokerLabelVector(Vector<PokerLabel> myPokerLabelVector) {
+		this.myPokerLabelVector = myPokerLabelVector;
+	}
+
+	/**
+	 * @return the mySendPokerLabelVector
+	 */
+	public Vector<JLabel> getMySendPokerLabelVector() {
+		return mySendPokerLabelVector;
+	}
+
+	/**
+	 * @param mySendPokerLabelVector the mySendPokerLabelVector to set
+	 */
+	public void setMySendPokerLabelVector(Vector<JLabel> mySendPokerLabelVector) {
+		this.mySendPokerLabelVector = mySendPokerLabelVector;
+	}
+
+	/**
+	 * @return the notSendButton
+	 */
+	public JButton getNotSendButton() {
+		return notSendButton;
+	}
+
+	/**
+	 * @param notSendButton the notSendButton to set
+	 */
+	public void setNotSendButton(JButton notSendButton) {
+		this.notSendButton = notSendButton;
+	}
+
+	/**
+	 * @return the otherSendPokerLabelVector
+	 */
+	public Vector<JLabel> getOtherSendPokerLabelVector() {
+		return otherSendPokerLabelVector;
+	}
+
+	/**
+	 * @param otherSendPokerLabelVector the otherSendPokerLabelVector to set
+	 */
+	public void setOtherSendPokerLabelVector(
+			Vector<JLabel> otherSendPokerLabelVector) {
+		this.otherSendPokerLabelVector = otherSendPokerLabelVector;
+	}
+
+	/**
+	 * @return the player1PokerLabelVector
+	 */
+	public Vector<JLabel> getPlayer1PokerLabelVector() {
+		return player1PokerLabelVector;
+	}
+
+	/**
+	 * @param player1PokerLabelVector the player1PokerLabelVector to set
+	 */
+	public void setPlayer1PokerLabelVector(Vector<JLabel> player1PokerLabelVector) {
+		this.player1PokerLabelVector = player1PokerLabelVector;
+	}
+
+	/**
+	 * @return the player2PokerLabelVector
+	 */
+	public Vector<JLabel> getPlayer2PokerLabelVector() {
+		return player2PokerLabelVector;
+	}
+
+	/**
+	 * @param player2PokerLabelVector the player2PokerLabelVector to set
+	 */
+	public void setPlayer2PokerLabelVector(Vector<JLabel> player2PokerLabelVector) {
+		this.player2PokerLabelVector = player2PokerLabelVector;
+	}
+
+	/**
+	 * @return the sendButton
+	 */
+	public JButton getSendButton() {
+		return sendButton;
+	}
+
+	/**
+	 * @param sendButton the sendButton to set
+	 */
+	public void setSendButton(JButton sendButton) {
+		this.sendButton = sendButton;
+	}
+
+	/**
+	 * @return the timer
+	 */
+	public Timer getTimer() {
+		return timer;
+	}
+
+	/**
+	 * @param timer the timer to set
+	 */
+	public void setTimer(Timer timer) {
+		this.timer = timer;
+	}
+
+	/**
+	 * @return the isMyTurn
+	 */
+	public Boolean getIsMyTurn() {
+		return isMyTurn;
+	}
+
+	/**
+	 * @return the oos
+	 */
+	public ObjectOutputStream getOos() {
+		return oos;
+	}
+
+	/**
+	 * @return the playernames
+	 */
+	public String[] getPlayernames() {
+		return playernames;
+	}
+
+	/**
+	 * @return the position
+	 */
+	public int getPosition() {
+		return position;
+	}
+
+	/**
+	 * @param lordLabels the lordLabels to set
+	 */
+	public void setLordLabels(JLabel[] lordLabels) {
+		this.lordLabels = lordLabels;
+	}
+	
 }

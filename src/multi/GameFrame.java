@@ -17,7 +17,11 @@ import Main.UserBean;
 import frame.LoginFrame;
 
 
-
+/**
+ * 多人模式游戏主框架
+ * @author huzhp
+ *
+ */
 public class GameFrame extends JFrame{
 	
 	public GameFrame(){
@@ -177,6 +181,102 @@ public class GameFrame extends JFrame{
 		ClientThread clientThread = new ClientThread(socket, gamepanel, prepare);
 		clientThread.start();
 	}
-
+	/**
+	 * @return the game
+	 */
+	public JMenu getGame() {
+		return game;
+	}
+	/**
+	 * @param game the game to set
+	 */
+	public void setGame(JMenu game) {
+		this.game = game;
+	}
+	/**
+	 * @return the gamepanel
+	 */
+	public GamePanel getGamepanel() {
+		return gamepanel;
+	}
+	/**
+	 * @param gamepanel the gamepanel to set
+	 */
+	public void setGamepanel(GamePanel gamepanel) {
+		this.gamepanel = gamepanel;
+	}
+	/**
+	 * @return the menubar
+	 */
+	public JMenuBar getMenubar() {
+		return menubar;
+	}
+	/**
+	 * @param menubar the menubar to set
+	 */
+	public void setMenubar(JMenuBar menubar) {
+		this.menubar = menubar;
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	/**
+	 * @return the newGame
+	 */
+	public JMenuItem getNewGame() {
+		return newGame;
+	}
+	/**
+	 * @param newGame the newGame to set
+	 */
+	public void setNewGame(JMenuItem newGame) {
+		this.newGame = newGame;
+	}
+	/**
+	 * @return the addGame
+	 */
+	public JMenuItem getAddGame() {
+		return addGame;
+	}
+	/**
+	 * @param addGame the addGame to set
+	 */
+	public void setAddGame(JMenuItem addGame) {
+		this.addGame = addGame;
+	}
+	/**
+	 * @return the exit
+	 */
+	public JMenuItem getExit() {
+		return exit;
+	}
+	/**
+	 * @param exit the exit to set
+	 */
+	public void setExit(JMenuItem exit) {
+		this.exit = exit;
+	}
+	/**
+	 * @return the prepare
+	 */
+	public PreparePanel getPrepare() {
+		return prepare;
+	}
+	/**
+	 * @param prepare the prepare to set
+	 */
+	public void setPrepare(PreparePanel prepare) {
+		this.prepare = prepare;
+	}
+    
 }
 

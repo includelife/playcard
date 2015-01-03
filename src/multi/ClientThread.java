@@ -8,7 +8,11 @@ import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
-
+/**
+ * 客户端线程
+ * @author huzhp
+ *
+ */
 public class ClientThread extends Thread{
 	private GamePanel gamepanel;//游戏开始的面板
 	private ObjectInputStream ois;
@@ -241,6 +245,104 @@ public class ClientThread extends Thread{
 				System.exit(0);
 			}
 		}
+	}
+
+	/**
+	 * @return the gamepanel
+	 */
+	public GamePanel getGamepanel() {
+		return gamepanel;
+	}
+
+	/**
+	 * @param gamepanel the gamepanel to set
+	 */
+	public void setGamepanel(GamePanel gamepanel) {
+		this.gamepanel = gamepanel;
+	}
+
+	/**
+	 * @return the ois
+	 */
+	public ObjectInputStream getOis() {
+		return ois;
+	}
+
+	/**
+	 * @param ois the ois to set
+	 */
+	public void setOis(ObjectInputStream ois) {
+		this.ois = ois;
+	}
+
+	/**
+	 * @return the oos
+	 */
+	public ObjectOutputStream getOos() {
+		return oos;
+	}
+
+	/**
+	 * @param oos the oos to set
+	 */
+	public void setOos(ObjectOutputStream oos) {
+		this.oos = oos;
+	}
+
+	/**
+	 * @return the playernames
+	 */
+	public String[] getPlayernames() {
+		return playernames;
+	}
+
+	/**
+	 * @param playernames the playernames to set
+	 */
+	public void setPlayernames(String[] playernames) {
+		this.playernames = playernames;
+	}
+
+	/**
+	 * @return the position
+	 */
+	public Integer getPosition() {
+		return position;
+	}
+
+	/**
+	 * @param position the position to set
+	 */
+	public void setPosition(Integer position) {
+		this.position = position;
+	}
+
+	/**
+	 * @return the prepare
+	 */
+	public PreparePanel getPrepare() {
+		return prepare;
+	}
+
+	/**
+	 * @param prepare the prepare to set
+	 */
+	public void setPrepare(PreparePanel prepare) {
+		this.prepare = prepare;
+	}
+
+	/**
+	 * @return the stop
+	 */
+	public Boolean getStop() {
+		return stop;
+	}
+
+	/**
+	 * @param stop the stop to set
+	 */
+	public void setStop(Boolean stop) {
+		this.stop = stop;
 	}
 	
 }

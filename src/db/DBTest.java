@@ -86,4 +86,103 @@ public class DBTest {
 			}
 		}
 	}
+
+	/**
+	 * @return the id
+	 */
+	public static String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public static void setId(String id) {
+		DBTest.id = id;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public static String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public static void setName(String name) {
+		DBTest.name = name;
+	}
+
+	/**
+	 * @return the pass
+	 */
+	public static String getPass() {
+		return pass;
+	}
+
+	/**
+	 * @param pass the pass to set
+	 */
+	public static void setPass(String pass) {
+		DBTest.pass = pass;
+	}
+
+	/**
+	 * @return the others
+	 */
+	public static String getOthers() {
+		return others;
+	}
+
+	/**
+	 * @param others the others to set
+	 */
+	public static void setOthers(String others) {
+		DBTest.others = others;
+	}
+
+	/**
+	 * @return the conn
+	 */
+	public static Connection getConn() {
+		return conn;
+	}
+
+	/**
+	 * @param conn the conn to set
+	 */
+	public static void setConn(Connection conn) {
+		DBTest.conn = conn;
+	}
+
+	/**
+	 * @return the username
+	 */
+	public static String getUsername() {
+		return USERNAME;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public static String getPassword() {
+		return PASSWORD;
+	}
+
+	/**
+	 * @return the driver
+	 */
+	public static String getDriver() {
+		return DRIVER;
+	}
+
+	/**
+	 * @return the url
+	 */
+	public static String getUrl() {
+		return URL;
+	}
+	
 }

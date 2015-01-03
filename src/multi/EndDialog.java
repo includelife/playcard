@@ -9,6 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
+/**
+ * 多人模式结束窗口
+ * @author huzhp
+ *
+ */
 public class EndDialog extends JDialog{
 	private JLabel[] count = new JLabel[3];
 	private JButton exit;
@@ -33,12 +38,14 @@ public class EndDialog extends JDialog{
 
 	//增加“退出游戏”按钮
 	public void addExit() {
-		this.exit = new JButton("退出游戏");
+		this.exit = new JButton("返回选择游戏");
 		getContentPane().add(this.exit);
 		exit.setBounds(73, 180, 90, 34);
 		//exit按钮注册事件
 		exit.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
+				
+				
 				System.exit(0);
 			}
 		});
@@ -116,4 +123,60 @@ public class EndDialog extends JDialog{
 		}
 	}
 
+	/**
+	 * @return the exit
+	 */
+	public JButton getExit() {
+		return exit;
+	}
+
+	/**
+	 * @param exit the exit to set
+	 */
+	public void setExit(JButton exit) {
+		this.exit = exit;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public JLabel getLabelName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(JLabel name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the point
+	 */
+	public JLabel getPoint() {
+		return point;
+	}
+
+	/**
+	 * @param point the point to set
+	 */
+	public void setPoint(JLabel point) {
+		this.point = point;
+	}
+
+	/**
+	 * @param count the count to set
+	 */
+	public void setCount(JLabel[] count) {
+		this.count = count;
+	}
+
+	/**
+	 * @param player the player to set
+	 */
+	public void setPlayer(JLabel[] player) {
+		this.player = player;
+	}
+	
 }

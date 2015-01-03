@@ -211,4 +211,95 @@ public class LoginFrame extends JFrame implements ActionListener{
 		this.password = password;
 	}
 
+	/**
+	 * @return the nameTF
+	 */
+	public JTextField getNameTF() {
+		return nameTF;
+	}
+
+	/**
+	 * @param nameTF the nameTF to set
+	 */
+	public void setNameTF(JTextField nameTF) {
+		this.nameTF = nameTF;
+	}
+
+	/**
+	 * @return the passwordTF
+	 */
+	public JPasswordField getPasswordTF() {
+		return passwordTF;
+	}
+
+	/**
+	 * @param passwordTF the passwordTF to set
+	 */
+	public void setPasswordTF(JPasswordField passwordTF) {
+		this.passwordTF = passwordTF;
+	}
+
+	/**
+	 * @return the loginButton
+	 */
+	public JButton getLoginButton() {
+		return loginButton;
+	}
+
+	/**
+	 * @param loginButton the loginButton to set
+	 */
+	public void setLoginButton(JButton loginButton) {
+		this.loginButton = loginButton;
+	}
+
+	/**
+	 * @return the resetButton
+	 */
+	public JButton getResetButton() {
+		return resetButton;
+	}
+
+	/**
+	 * @param resetButton the resetButton to set
+	 */
+	public void setResetButton(JButton resetButton) {
+		this.resetButton = resetButton;
+	}
+
+	/**
+	 * @return the progressBar
+	 */
+	public JProgressBarFrame getProgressBar() {
+		return progressBar;
+	}
+
+	/**
+	 * @param progressBar the progressBar to set
+	 */
+	public void setProgressBar(JProgressBarFrame progressBar) {
+		this.progressBar = progressBar;
+	}
+
+	/**
+	 * @return the regisButton
+	 */
+	public JButton getRegisButton() {
+		return regisButton;
+	}
+
+	/**
+	 * @param regisButton the regisButton to set
+	 */
+	public void setRegisButton(JButton regisButton) {
+		this.regisButton = regisButton;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 }

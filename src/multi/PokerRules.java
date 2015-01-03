@@ -6,7 +6,11 @@ import java.util.Iterator;
 import java.util.TreeSet;
 import java.util.Vector;
 
-
+/**
+ * ≥ˆ≈∆πÊ‘Ú
+ * @author huzhp
+ *
+ */
 public class PokerRules {
 	/**
 	 * 
@@ -736,7 +740,6 @@ private static Integer twentyPoker(Vector<Poker> pokerVector) {
 		return 0;
 	}
 }
-
 
 }
 

@@ -75,5 +75,42 @@ public class PlayFrame extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(this,"¿ª·¢ÖÐ");
 		}
 	}
+	/**
+	 * @return the pane
+	 */
+	public Container getPane() {
+		return pane;
+	}
+	/**
+	 * @param pane the pane to set
+	 */
+	public void setPane(Container pane) {
+		this.pane = pane;
+	}
+	/**
+	 * @return the returnButton
+	 */
+	public JButton getReturnButton() {
+		return returnButton;
+	}
+	/**
+	 * @param returnButton the returnButton to set
+	 */
+	public void setReturnButton(JButton returnButton) {
+		this.returnButton = returnButton;
+	}
+	/**
+	 * @return the settingButton
+	 */
+	public JButton getSettingButton() {
+		return settingButton;
+	}
+	/**
+	 * @param settingButton the settingButton to set
+	 */
+	public void setSettingButton(JButton settingButton) {
+		this.settingButton = settingButton;
+	}
+	
 
 }

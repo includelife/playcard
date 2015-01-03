@@ -124,4 +124,32 @@ public class LoginAction {
 		this.password = password;
 	}
 
+	/**
+	 * @return the userPro
+	 */
+	public Properties getUserPro() {
+		return userPro;
+	}
+
+	/**
+	 * @param userPro the userPro to set
+	 */
+	public void setUserPro(Properties userPro) {
+		this.userPro = userPro;
+	}
+
+	/**
+	 * @return the file
+	 */
+	public File getFile() {
+		return file;
+	}
+
+	/**
+	 * @param file the file to set
+	 */
+	public void setFile(File file) {
+		this.file = file;
+	}
+	
 }

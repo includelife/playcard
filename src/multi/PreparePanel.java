@@ -7,6 +7,11 @@ import java.awt.Graphics;
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 
+/**
+ * 游戏准备界面
+ * @author huzhp
+ *
+ */
 public class PreparePanel extends JPanel{
 	// 该类为启动程序，游戏开始前的准备界面
 

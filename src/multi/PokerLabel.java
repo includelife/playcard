@@ -7,6 +7,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.border.BevelBorder;
 
+/**
+ * ∆ÀøÀ≈∆±Í«©¿‡
+ * @author huzhp
+ *
+ */
 public class PokerLabel extends JLabel{
 	private Boolean clicked = false;
 	private int height = 96;
@@ -67,6 +72,34 @@ public class PokerLabel extends JLabel{
 
 	public void setPokerID(int pokerID) {
 		this.pokerID = pokerID;
+	}
+
+	/**
+	 * @return the height
+	 */
+	public int getHeight() {
+		return height;
+	}
+
+	/**
+	 * @param height the height to set
+	 */
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	/**
+	 * @return the width
+	 */
+	public int getWidth() {
+		return width;
+	}
+
+	/**
+	 * @param width the width to set
+	 */
+	public void setWidth(int width) {
+		this.width = width;
 	}
 
 }

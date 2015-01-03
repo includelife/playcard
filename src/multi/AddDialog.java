@@ -10,7 +10,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 
+/**
+ * 建立新游戏的窗口
+ * @author huzhp
+ *
+ */
 public class AddDialog extends JDialog{
+	
 	private JButton connect;
 	private JTextField ipAddress;
 	private JLabel jLabel1;
@@ -177,5 +183,68 @@ public class AddDialog extends JDialog{
 		}
 	}
 
+	/**
+	 * @return the connect
+	 */
+	public JButton getConnect() {
+		return connect;
+	}
+
+	/**
+	 * @param connect the connect to set
+	 */
+	public void setConnect(JButton connect) {
+		this.connect = connect;
+	}
+
+	/**
+	 * @return the ipAddress
+	 */
+	public JTextField getIpAddress() {
+		return ipAddress;
+	}
+
+	/**
+	 * @param ipAddress the ipAddress to set
+	 */
+	public void setIpAddress(JTextField ipAddress) {
+		this.ipAddress = ipAddress;
+	}
+
+	/**
+	 * @return the jLabel1
+	 */
+	public JLabel getjLabel1() {
+		return jLabel1;
+	}
+
+	/**
+	 * @param jLabel1 the jLabel1 to set
+	 */
+	public void setjLabel1(JLabel jLabel1) {
+		this.jLabel1 = jLabel1;
+	}
+
+	/**
+	 * @return the jLabel2
+	 */
+	public JLabel getjLabel2() {
+		return jLabel2;
+	}
+
+	/**
+	 * @param jLabel2 the jLabel2 to set
+	 */
+	public void setjLabel2(JLabel jLabel2) {
+		this.jLabel2 = jLabel2;
+	}
+
+	/**
+	 * @param port the port to set
+	 */
+	public void setPort(JTextField port) {
+		this.port = port;
+	}
+	
 }
 

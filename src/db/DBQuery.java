@@ -198,4 +198,40 @@ public class DBQuery {
 	public void setScore(String score) {
 		this.score = score;
 	}
+
+	/**
+	 * @return the conn
+	 */
+	public static Connection getConn() {
+		return conn;
+	}
+
+	/**
+	 * @param conn the conn to set
+	 */
+	public static void setConn(Connection conn) {
+		DBQuery.conn = conn;
+	}
+
+	/**
+	 * @return the username
+	 */
+	public static String getUsername() {
+		return USERNAME;
+	}
+
+	/**
+	 * @return the driver
+	 */
+	public static String getDriver() {
+		return DRIVER;
+	}
+
+	/**
+	 * @return the url
+	 */
+	public static String getUrl() {
+		return URL;
+	}
+	
 }
