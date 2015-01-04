@@ -128,13 +128,13 @@ public class Playing extends JFrame implements ActionListener{
 	 */
 	private void getScore(){
 		users = LoginAction.getUsername();
-		DBQuery scorequery = new DBQuery(users,"score");
-		scores = scorequery.getScore();
+//		DBQuery scorequery = new DBQuery(users,"score");
+//		scores = scorequery.getScore();
 		
-//		scorePro = new Properties();
-//		scorefile = new File("Score.properties");		
-//		FileUtil.loadPro(scorePro, scorefile);		
-//		setScores(scorePro.getProperty(users));
+		scorePro = new Properties();
+		scorefile = new File("Score.properties");		
+		FileUtil.loadPro(scorePro, scorefile);		
+		setScores(scorePro.getProperty(users));
 	}
 	
 	/**
@@ -298,7 +298,7 @@ public class Playing extends JFrame implements ActionListener{
 			PlayUtil.order(playerList[i]);
 			PlayUtil.rePosition(this,playerList[i],i);//重新定位
 		}
-		this.lord = new JLabel(new ImageIcon("images/dizhu.gif"));
+		this.lord = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("images/dizhu.gif")));
 		lord.setVisible(false);
 		lord.setSize(40,40);
 		container.add(lord);

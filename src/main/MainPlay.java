@@ -8,7 +8,7 @@ import frame.LoginFrame;
  * @author huzhp
  *
  */
-public class Main {
+public class MainPlay {
 
 
 	

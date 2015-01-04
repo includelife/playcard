@@ -29,85 +29,89 @@ import main.CardType;
  *
  */
 public class GamePanel extends JPanel{
+	
 	/**
 	 * 生成57个图标
 	 */
-	private static ImageIcon imageIcons[] = new ImageIcon[57];
+	private static ImageIcon imageIcons[] = new ImageIcon[57];public GamePanel() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	/**
 	 * 将图标与图片资源一一对应起来
 	 */
-	static {
-		imageIcons[1] = new ImageIcon("images/" + 1 +"-"+3+".gif");	
-		imageIcons[2] = new ImageIcon("images/" + 2 +"-"+3+".gif");	
-		imageIcons[3] = new ImageIcon("images/" + 3 +"-"+3+".gif");	
-		imageIcons[4] = new ImageIcon("images/" + 4 +"-"+3+".gif");
+	public void createRecouse() {
 		
-		imageIcons[5] = new ImageIcon("images/" + 1 +"-"+4+".gif");	
-		imageIcons[6] = new ImageIcon("images/" + 2 +"-"+4+".gif");	
-		imageIcons[7] = new ImageIcon("images/" + 3 +"-"+4+".gif");	
-		imageIcons[8] = new ImageIcon("images/" + 4 +"-"+4+".gif");	
+		imageIcons[1] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 1 +"-"+3+".gif"));	
+		imageIcons[2] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 2 +"-"+3+".gif"));	
+		imageIcons[3] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 3 +"-"+3+".gif"));	
+		imageIcons[4] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 4 +"-"+3+".gif"));
 		
-		imageIcons[9] = new ImageIcon("images/" + 1 +"-"+5+".gif");		
-		imageIcons[10] = new ImageIcon("images/" + 2 +"-"+5+".gif");	
-		imageIcons[11] = new ImageIcon("images/" + 3 +"-"+5+".gif");	
-		imageIcons[12] = new ImageIcon("images/" + 4 +"-"+5+".gif");
+		imageIcons[5] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 1 +"-"+4+".gif"));	
+		imageIcons[6] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 2 +"-"+4+".gif"));	
+		imageIcons[7] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 3 +"-"+4+".gif"));	
+		imageIcons[8] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 4 +"-"+4+".gif"));	
 		
-		imageIcons[13] = new ImageIcon("images/" + 1 +"-"+6+".gif");	
-		imageIcons[14] = new ImageIcon("images/" + 2 +"-"+6+".gif");	
-		imageIcons[15] = new ImageIcon("images/" + 3 +"-"+6+".gif");	
-		imageIcons[16] = new ImageIcon("images/" + 4 +"-"+6+".gif");
+		imageIcons[9] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 1 +"-"+5+".gif"));		
+		imageIcons[10] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 2 +"-"+5+".gif"));	
+		imageIcons[11] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 3 +"-"+5+".gif"));	
+		imageIcons[12] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 4 +"-"+5+".gif"));
 		
-		imageIcons[17] = new ImageIcon("images/" + 1 +"-"+7+".gif");	
-		imageIcons[18] = new ImageIcon("images/" + 2 +"-"+7+".gif");	
-		imageIcons[19] = new ImageIcon("images/" + 3 +"-"+7+".gif");	
-		imageIcons[20] = new ImageIcon("images/" + 4 +"-"+7+".gif");
+		imageIcons[13] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 1 +"-"+6+".gif"));	
+		imageIcons[14] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 2 +"-"+6+".gif"));	
+		imageIcons[15] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 3 +"-"+6+".gif"));	
+		imageIcons[16] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 4 +"-"+6+".gif"));
 		
-		imageIcons[21] = new ImageIcon("images/" + 1 +"-"+8+".gif");	
-		imageIcons[22] = new ImageIcon("images/" + 2 +"-"+8+".gif");	
-		imageIcons[23] = new ImageIcon("images/" + 3 +"-"+8+".gif");	
-		imageIcons[24] = new ImageIcon("images/" + 4 +"-"+8+".gif");
+		imageIcons[17] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 1 +"-"+7+".gif"));	
+		imageIcons[18] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 2 +"-"+7+".gif"));	
+		imageIcons[19] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 3 +"-"+7+".gif"));	
+		imageIcons[20] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 4 +"-"+7+".gif"));
 		
-		imageIcons[25] = new ImageIcon("images/" + 1 +"-"+9+".gif");	
-		imageIcons[26] = new ImageIcon("images/" + 2 +"-"+9+".gif");	
-		imageIcons[27] = new ImageIcon("images/" + 3 +"-"+9+".gif");	
-		imageIcons[28] = new ImageIcon("images/" + 4 +"-"+9+".gif");	
+		imageIcons[21] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 1 +"-"+8+".gif"));	
+		imageIcons[22] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 2 +"-"+8+".gif"));	
+		imageIcons[23] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 3 +"-"+8+".gif"));	
+		imageIcons[24] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 4 +"-"+8+".gif"));
 		
-		imageIcons[29] = new ImageIcon("images/" + 1 +"-"+10+".gif");	
-		imageIcons[30] = new ImageIcon("images/" + 2 +"-"+10+".gif");	
-		imageIcons[31] = new ImageIcon("images/" + 3 +"-"+10+".gif");	
-		imageIcons[32] = new ImageIcon("images/" + 4 +"-"+10+".gif");
+		imageIcons[25] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 1 +"-"+9+".gif"));	
+		imageIcons[26] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 2 +"-"+9+".gif"));	
+		imageIcons[27] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 3 +"-"+9+".gif"));	
+		imageIcons[28] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 4 +"-"+9+".gif"));	
 		
-		imageIcons[33] = new ImageIcon("images/" + 1 +"-"+11+".gif");	
-		imageIcons[34] = new ImageIcon("images/" + 2 +"-"+11+".gif");	
-		imageIcons[35] = new ImageIcon("images/" + 3 +"-"+11+".gif");	
-		imageIcons[36] = new ImageIcon("images/" + 4 +"-"+11+".gif");	
+		imageIcons[29] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 1 +"-"+10+".gif"));	
+		imageIcons[30] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 2 +"-"+10+".gif"));	
+		imageIcons[31] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 3 +"-"+10+".gif"));	
+		imageIcons[32] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 4 +"-"+10+".gif"));
 		
-		imageIcons[37] = new ImageIcon("images/" + 1 +"-"+12+".gif");
-		imageIcons[38] = new ImageIcon("images/" + 2 +"-"+12+".gif");	
-		imageIcons[39] = new ImageIcon("images/" + 3 +"-"+12+".gif");	
-		imageIcons[40] = new ImageIcon("images/" + 4 +"-"+12+".gif");	
+		imageIcons[33] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 1 +"-"+11+".gif"));	
+		imageIcons[34] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 2 +"-"+11+".gif"));	
+		imageIcons[35] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 3 +"-"+11+".gif"));	
+		imageIcons[36] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 4 +"-"+11+".gif"));	
 		
-		imageIcons[41] = new ImageIcon("images/" + 1 +"-"+13+".gif");	
-		imageIcons[42] = new ImageIcon("images/" + 2 +"-"+13+".gif");	
-		imageIcons[43] = new ImageIcon("images/" + 3 +"-"+13+".gif");	
-		imageIcons[44] = new ImageIcon("images/" + 4 +"-"+13+".gif");	
+		imageIcons[37] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 1 +"-"+12+".gif"));
+		imageIcons[38] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 2 +"-"+12+".gif"));	
+		imageIcons[39] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 3 +"-"+12+".gif"));	
+		imageIcons[40] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 4 +"-"+12+".gif"));	
 		
-		imageIcons[45] = new ImageIcon("images/" + 1 +"-"+1+".gif");	
-		imageIcons[46] = new ImageIcon("images/" + 2 +"-"+1+".gif");	
-		imageIcons[47] = new ImageIcon("images/" + 3 +"-"+1+".gif");	
-		imageIcons[48] = new ImageIcon("images/" + 4 +"-"+1+".gif");	
+		imageIcons[41] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 1 +"-"+13+".gif"));	
+		imageIcons[42] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 2 +"-"+13+".gif"));	
+		imageIcons[43] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 3 +"-"+13+".gif"));	
+		imageIcons[44] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 4 +"-"+13+".gif"));	
 		
-		imageIcons[49] = new ImageIcon("images/" + 1 +"-"+2+".gif");	
-		imageIcons[50] = new ImageIcon("images/" + 2 +"-"+2+".gif");	
-		imageIcons[51] = new ImageIcon("images/" + 3 +"-"+2+".gif");	
-		imageIcons[52] = new ImageIcon("images/" + 4 +"-"+2+".gif");	
+		imageIcons[45] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 1 +"-"+1+".gif"));	
+		imageIcons[46] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 2 +"-"+1+".gif"));	
+		imageIcons[47] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 3 +"-"+1+".gif"));	
+		imageIcons[48] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 4 +"-"+1+".gif"));	
 		
-		imageIcons[53] = new ImageIcon("images/" + 5 +"-"+1+".gif");	
-		imageIcons[54] = new ImageIcon("images/" + 5 +"-"+2+".gif");	
-		imageIcons[55] = new ImageIcon("images/dizhu.gif");
-		imageIcons[56] = new ImageIcon("images/rear.gif");
-		imageIcons[0] = new ImageIcon("images/pass.gif");
+		imageIcons[49] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 1 +"-"+2+".gif"));	
+		imageIcons[50] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 2 +"-"+2+".gif"));	
+		imageIcons[51] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 3 +"-"+2+".gif"));	
+		imageIcons[52] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 4 +"-"+2+".gif"));	
+		
+		imageIcons[53] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 5 +"-"+1+".gif"));	
+		imageIcons[54] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + 5 +"-"+2+".gif"));	
+		imageIcons[55] = new ImageIcon(this.getClass().getClassLoader().getResource("images/dizhu.gif"));
+		imageIcons[56] = new ImageIcon(this.getClass().getClassLoader().getResource("images/rear.gif"));
+		imageIcons[0] = new ImageIcon(this.getClass().getClassLoader().getResource("images/pass.gif"));
 //	int count = 1;
 //		for (int i = 1; i <= 5; i++) {
 //			for (int j = 1; j <= 13; j++) {
@@ -115,7 +119,7 @@ public class GamePanel extends JPanel{
 //					break;
 //				else{
 //					
-//					imageIconsTemp[count] = new ImageIcon("images/" + i +"-"+j+".gif");	
+//					imageIconsTemp[count] = new ImageIcon(this.getClass().getClassLoader().getResource("images/" + i +"-"+j+".gif");	
 //					count++;
 //				}
 //			}
@@ -156,6 +160,7 @@ public class GamePanel extends JPanel{
 	 */
 	public GamePanel(int width, int height) {
 		super();
+		this.createRecouse();
 		//设置画布的长和宽
 		this.width = width;
 		this.height = height;
@@ -242,7 +247,7 @@ public class GamePanel extends JPanel{
 				(int) (height * 0.92), (int) (width * 0.053),
 				(int) (height * 0.069));
 		this.lordLabels[0].setVisible(false);
-
+		
 		this.lordLabels[1] = new JLabel(imageIcons[55]);
 		this.add(this.lordLabels[1]);
 		this.lordLabels[1].setBounds((int) (width * 0.011),

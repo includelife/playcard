@@ -39,7 +39,7 @@ public class JProgressBarFrame extends JDialog {
 		Dimension dim = tk.getScreenSize();
 		this.setResizable(false);// 设置窗口不可调整大小
 		this.setBounds(dim.width / 2 - 110, dim.height / 2 - 40, 211, 90);
-		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		validate();
 	}
 

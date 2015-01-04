@@ -47,50 +47,54 @@ public class LoginAction {
 		// TODO Auto-generated method stub
 		boolean check = false;
 
+		{
 		// /******************************************* 采用数据库
 		// **********************************************/
-		try {
-			DBQuery userquery = new DBQuery(this.username);
-			String pass = userquery.getPassword();
-			if (pass.equals(this.password)) {
-				check = true;
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+//		try {
+//			DBQuery userquery = new DBQuery(this.username);
+//			String pass = userquery.getPassword();
+//			if (pass.equals(this.password)) {
+//				check = true;
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		}
 
+		{
 		// /*******************************************采用文件********************************************/
 		//
-		// /*验证用户名和密码*/
-		// userPro = new Properties();
-		// file = new File("User.properties");
-		// FileUtil.loadPro(userPro, file);
-		//
-		// /**
-		// *如果文件不存在，创建
-		// *如果文件存在则查找
-		// */
-		// if(file.length() != 0)
-		// {
-		// if(userPro.containsKey(this.getUsername()))
-		// {
-		// if((this.password).equals(userPro.getProperty(this.getUsername())))
-		// {
-		// check = true;
-		// }else{
-		// //密码错误
-		// check = false;
-		// }
-		// }else{
-		// //用户名不存在
-		// check = false;
-		// }
-		// }else{
-		// //用户名不存在
-		// check = false;
-		// }
-
+		 /*验证用户名和密码*/
+		 userPro = new Properties();
+		 String filename = "User.properties";
+		 file = new File("User.properties");
+		 FileUtil.loadPro(userPro, file);
+		
+		 /**
+		 *如果文件不存在，创建
+		 *如果文件存在则查找
+		 */
+		 if(file.length() != 0)
+		 {
+		 if(userPro.containsKey(this.getUsername()))
+		 {
+		 if((this.password).equals(userPro.getProperty(this.getUsername())))
+		 {
+		 check = true;
+		 }else{
+		 //密码错误
+		 check = false;
+		 }
+		 }else{
+		 //用户名不存在
+		 check = false;
+		 }
+		 }else{
+		 //用户名不存在
+		 check = false;
+		 }
+		}
 		return check;
 	}
 

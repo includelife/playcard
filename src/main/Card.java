@@ -102,14 +102,15 @@ public class Card extends JLabel implements MouseListener{
 	//设置卡牌背面
 	public void turnRear() {
 		// TODO Auto-generated method stub
-		this.setIcon(new ImageIcon("images/rear.gif"));
+//		this.setIcon(new ImageIcon("images/rear.gif"));
+		this.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("images/rear.gif")));
 		this.up = false; 
 	}
 	
 	//设置卡牌正面
 	public void turnFront() {
 		// TODO Auto-generated method stub
-		this.setIcon(new ImageIcon("images/"+name+".gif"));
+		this.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("images/"+name+".gif")));
 		this.up = true; 		
 	}
 	
